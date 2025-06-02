@@ -1,21 +1,9 @@
-.info-section strong {
-            color: #1e3a8a;
-            font-weight: 600;
-        }
-
-        .info-section code {
-            background: #f1f5f9;
-            border: 1px solid #cbd5e1;
-            padding: 2px 6px;
-            font-family: 'SF Mono', monospace;
-            font-size: 12px;
-            color: #475569;
-        }<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meta Ray-Ban Procedures</title>
+    <title>Smart Glasses Procedure Creator</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
         
@@ -187,6 +175,24 @@
             background: #1e40af;
         }
 
+        .upload-btn {
+            background: #059669;
+            color: #ffffff;
+            border: none;
+            padding: 10px 16px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .upload-btn:hover {
+            background: #047857;
+        }
+
         .generate-btn {
             background: #f3f4f6;
             color: #374151;
@@ -272,6 +278,20 @@
             font-size: 13px;
         }
 
+        .info-section strong {
+            color: #1e3a8a;
+            font-weight: 600;
+        }
+
+        .info-section code {
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            padding: 2px 6px;
+            font-family: 'SF Mono', monospace;
+            font-size: 12px;
+            color: #475569;
+        }
+
         .status-bar {
             position: fixed;
             bottom: 16px;
@@ -328,7 +348,11 @@
                             <button type="button" class="remove-btn">×</button>
                         </div>
                     </div>
-                    <button type="button" class="add-btn">+ Add Instruction</button>
+                    <div style="display: flex; gap: 12px; align-items: center;">
+                        <button type="button" class="add-btn">+ Add Instruction</button>
+                        <button type="button" class="upload-btn">Upload JSON</button>
+                        <input type="file" id="json-upload" accept=".json" style="display: none;">
+                    </div>
                 </div>
 
                 <button type="submit" class="generate-btn">Generate Procedure</button>
@@ -368,7 +392,7 @@
         // Configuration
         const MAX_INSTRUCTIONS = 50;
         const MAX_CHAR_PER_INSTRUCTION = 200;
-        const PROFANITY_LIST = ['damn', 'hell', 'crap', 'stupid', 'idiot', 'shit', 'fuck', 'ass', 'bitch']; // Add more as needed
+        const PROFANITY_LIST = ['fucker', 'motherfucker', 'shitballs', 'cunt', 'twat', 'shit', 'fuck', 'ass', 'bitch']; // Add more as needed
 
         // State
         let currentProcedure = null;
@@ -392,7 +416,11 @@
 
         function checkProfanity(text) {
             const lowerText = text.toLowerCase();
-            return PROFANITY_LIST.some(word => lowerText.includes(word));
+            // Use word boundaries to match whole words only
+            return PROFANITY_LIST.some(word => {
+                const regex = new RegExp(`\\b${word}\\b`, 'i');
+                return regex.test(lowerText);
+            });
         }
 
         function updateStepNumbers() {
@@ -460,6 +488,98 @@
             input.addEventListener('input', updateStatusBar);
             
             updateStatusBar();
+        }
+
+        function uploadJSON() {
+            document.getElementById('json-upload').click();
+        }
+
+        function handleJSONUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            if (!file.name.endsWith('.json')) {
+                alert('Please upload a JSON file.');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    const jsonData = JSON.parse(e.target.result);
+                    populateFormFromJSON(jsonData);
+                } catch (error) {
+                    alert('Invalid JSON file. Please check the format and try again.');
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        function populateFormFromJSON(jsonData) {
+            // Validate JSON structure
+            if (!jsonData.title || !jsonData.instructions || !Array.isArray(jsonData.instructions)) {
+                alert('Invalid JSON format. Expected structure:\n{\n  "title": "...",\n  "instructions": [...]\n}');
+                return;
+            }
+
+            // Clear existing form
+            clearForm();
+
+            // Set title
+            const titleInput = document.querySelector('.form-group input[type="text"]');
+            titleInput.value = jsonData.title;
+
+            // Add instructions in correct order (first to last)
+            const container = document.querySelector('.instructions-container');
+            const sectionHeader = container.querySelector('.section-header');
+
+            // Create all instruction rows first, then insert them in order
+            const instructionElements = [];
+            
+            jsonData.instructions.forEach((instructionObj, index) => {
+                const instruction = instructionObj.instruction || instructionObj;
+                
+                const instructionRow = document.createElement('div');
+                instructionRow.className = 'instruction-row';
+                
+                instructionRow.innerHTML = `
+                    <div class="step-number">${String(index + 1).padStart(2, '0')}</div>
+                    <input type="text" class="input-field instruction-input" placeholder="Enter instruction" maxlength="${MAX_CHAR_PER_INSTRUCTION}" value="${instruction}">
+                    <button type="button" class="remove-btn">×</button>
+                `;
+                
+                // Add event listeners
+                const removeBtn = instructionRow.querySelector('.remove-btn');
+                const input = instructionRow.querySelector('.instruction-input');
+                
+                removeBtn.addEventListener('click', () => removeInstruction(instructionRow));
+                input.addEventListener('input', updateStatusBar);
+                
+                instructionElements.push(instructionRow);
+            });
+
+            // Insert all elements in the correct order (append after section header)
+            instructionElements.forEach(element => {
+                container.appendChild(element);
+            });
+
+            updateStatusBar();
+            
+            // Show success message
+            alert(`Successfully loaded procedure: "${jsonData.title}" with ${jsonData.instructions.length} instructions.`);
+        }
+
+        function clearForm() {
+            // Clear title
+            const titleInput = document.querySelector('.form-group input[type="text"]');
+            titleInput.value = '';
+
+            // Remove all existing instruction rows
+            const existingRows = document.querySelectorAll('.instruction-row');
+            existingRows.forEach(row => row.remove());
+
+            // Hide output panel
+            document.querySelector('.output-panel').style.display = 'none';
         }
 
         function removeInstruction(row) {
@@ -624,6 +744,14 @@
             // Add instruction button
             const addBtn = document.querySelector('.add-btn');
             addBtn.addEventListener('click', addInstruction);
+            
+            // Upload JSON button
+            const uploadBtn = document.querySelector('.upload-btn');
+            uploadBtn.addEventListener('click', uploadJSON);
+            
+            // File input change
+            const fileInput = document.getElementById('json-upload');
+            fileInput.addEventListener('change', handleJSONUpload);
             
             // Remove instruction buttons (for initial rows)
             document.querySelectorAll('.remove-btn').forEach(btn => {

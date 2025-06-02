@@ -1,0 +1,658 @@
+.info-section strong {
+            color: #1e3a8a;
+            font-weight: 600;
+        }
+
+        .info-section code {
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            padding: 2px 6px;
+            font-family: 'SF Mono', monospace;
+            font-size: 12px;
+            color: #475569;
+        }<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meta Ray-Ban Procedures</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #f8f9fa;
+            color: #2c3e50;
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 24px;
+        }
+
+        .header {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            padding: 32px;
+            margin-bottom: 24px;
+            text-align: center;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1e3a8a;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            font-size: 14px;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 500;
+        }
+
+        .main-panel {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            padding: 32px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #1e3a8a;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 12px 16px;
+            background: #ffffff;
+            border: 1px solid #d1d5db;
+            color: #374151;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            transition: all 0.2s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #1e3a8a;
+            box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
+        }
+
+        .input-field::placeholder {
+            color: #9ca3af;
+        }
+
+        .instructions-container {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+
+        .section-header {
+            font-size: 12px;
+            font-weight: 600;
+            color: #1e3a8a;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .instruction-row {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 12px;
+            align-items: center;
+        }
+
+        .step-number {
+            background: #1e3a8a;
+            color: #ffffff;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 12px;
+            flex-shrink: 0;
+        }
+
+        .instruction-input {
+            flex: 1;
+        }
+
+        .remove-btn {
+            background: #ef4444;
+            color: #ffffff;
+            border: none;
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .remove-btn:hover {
+            background: #dc2626;
+        }
+
+        .add-btn {
+            background: #1e3a8a;
+            color: #ffffff;
+            border: none;
+            padding: 10px 16px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .add-btn:hover {
+            background: #1e40af;
+        }
+
+        .generate-btn {
+            background: #f3f4f6;
+            color: #374151;
+            border: 1px solid #d1d5db;
+            padding: 16px 24px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            width: 100%;
+            transition: all 0.2s ease;
+        }
+
+        .generate-btn:hover {
+            background: #e5e7eb;
+            border-color: #9ca3af;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .output-panel {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            padding: 24px;
+            margin-top: 24px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        .output-header {
+            font-size: 12px;
+            font-weight: 600;
+            color: #059669;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .json-display {
+            background: #f3f4f6;
+            border: 1px solid #d1d5db;
+            padding: 16px;
+            font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
+            font-size: 13px;
+            color: #374151;
+            white-space: pre-wrap;
+            overflow-x: auto;
+            margin-bottom: 16px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .action-btn {
+            background: #1e3a8a;
+            color: #ffffff;
+            border: none;
+            padding: 10px 16px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .action-btn:hover {
+            background: #1e40af;
+        }
+
+        .info-section {
+            background: #ffffff;
+            border: 1px solid #e5e7eb;
+            padding: 16px;
+            margin-bottom: 16px;
+            font-size: 13px;
+        }
+
+        .status-bar {
+            position: fixed;
+            bottom: 16px;
+            right: 16px;
+            background: #ffffff;
+            border: 1px solid #d1d5db;
+            padding: 8px 12px;
+            font-size: 11px;
+            color: #6b7280;
+            font-weight: 500;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .status-valid {
+            color: #059669;
+        }
+
+        .status-invalid {
+            color: #dc2626;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Smart Glasses Procedure Creator</h1>
+            <p>Industrial Procedure Generator</p>
+        </div>
+        
+        <div class="main-panel">
+            <form>
+                <div class="form-group">
+                    <label class="form-label">Procedure Title</label>
+                    <input type="text" class="input-field" placeholder="Coffee machine initialization sequence" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Instructions</label>
+                    <div class="instructions-container">
+                        <div class="section-header">Procedure Steps</div>
+                        <div class="instruction-row">
+                            <div class="step-number">01</div>
+                            <input type="text" class="input-field instruction-input" placeholder="Enter first instruction">
+                            <button type="button" class="remove-btn">×</button>
+                        </div>
+                        <div class="instruction-row">
+                            <div class="step-number">02</div>
+                            <input type="text" class="input-field instruction-input" placeholder="Enter second instruction">
+                            <button type="button" class="remove-btn">×</button>
+                        </div>
+                        <div class="instruction-row">
+                            <div class="step-number">03</div>
+                            <input type="text" class="input-field instruction-input" placeholder="Enter third instruction">
+                            <button type="button" class="remove-btn">×</button>
+                        </div>
+                    </div>
+                    <button type="button" class="add-btn">+ Add Instruction</button>
+                </div>
+
+                <button type="submit" class="generate-btn">Generate Procedure</button>
+            </form>
+
+            <div class="output-panel" style="display: none;">
+                <div class="output-header">Generated Procedure</div>
+                
+                <div class="json-display">{
+  "title": "Coffee Machine Initialization Sequence",
+  "instructions": [
+    {"step": 1, "instruction": "Power on main unit and wait for startup"},
+    {"step": 2, "instruction": "Fill water reservoir to maximum line"},
+    {"step": 3, "instruction": "Insert coffee pod and close chamber"}
+  ]
+}</div>
+                
+                <div class="action-buttons">
+                    <button class="action-btn">Copy JSON</button>
+                    <button class="action-btn">Download File</button>
+                </div>
+
+                <div class="info-section">
+                    <strong>Filename:</strong> <code>procedures/coffee_machine_init_x7k9m2.json</code><br>
+                    <strong>Procedure ID:</strong> <code>coffee_machine_init_x7k9m2</code><br>
+                    <strong>GitHub URL:</strong> <code>https://yourusername.github.io/Meta-Raybans-Procedures/procedures/coffee_machine_init_x7k9m2.json</code>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="status-bar">
+        <span class="status-valid">INSTRUCTIONS: 3/50 • CHARS: 127/200 • STATUS: VALID</span>
+    </div>
+
+    <script>
+        // Configuration
+        const MAX_INSTRUCTIONS = 50;
+        const MAX_CHAR_PER_INSTRUCTION = 200;
+        const PROFANITY_LIST = ['damn', 'hell', 'crap', 'stupid', 'idiot', 'shit', 'fuck', 'ass', 'bitch']; // Add more as needed
+
+        // State
+        let currentProcedure = null;
+
+        // Utility functions
+        function generateUID() {
+            const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+            let result = '';
+            for (let i = 0; i < 8; i++) {
+                result += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return result;
+        }
+
+        function sanitizeForFilename(title) {
+            return title.toLowerCase()
+                       .replace(/[^a-z0-9\s]/g, '')
+                       .replace(/\s+/g, '_')
+                       .substring(0, 30);
+        }
+
+        function checkProfanity(text) {
+            const lowerText = text.toLowerCase();
+            return PROFANITY_LIST.some(word => lowerText.includes(word));
+        }
+
+        function updateStepNumbers() {
+            const stepNumbers = document.querySelectorAll('.step-number');
+            stepNumbers.forEach((step, index) => {
+                step.textContent = String(index + 1).padStart(2, '0');
+            });
+        }
+
+        function updateStatusBar() {
+            const instructions = getInstructions();
+            const totalChars = instructions.reduce((sum, inst) => sum + inst.length, 0);
+            const hasErrors = instructions.some(inst => inst.length > MAX_CHAR_PER_INSTRUCTION || checkProfanity(inst));
+            const statusBar = document.querySelector('.status-bar span');
+            
+            const status = hasErrors ? 'INVALID' : 'VALID';
+            const statusClass = hasErrors ? 'status-invalid' : 'status-valid';
+            
+            statusBar.textContent = `INSTRUCTIONS: ${instructions.length}/${MAX_INSTRUCTIONS} • CHARS: ${totalChars}/${MAX_CHAR_PER_INSTRUCTION * instructions.length} • STATUS: ${status}`;
+            statusBar.className = statusClass;
+        }
+
+        function getInstructions() {
+            const inputs = document.querySelectorAll('.instruction-input');
+            return Array.from(inputs).map(input => input.value.trim()).filter(val => val.length > 0);
+        }
+
+        function addInstruction() {
+            const currentRows = document.querySelectorAll('.instruction-row').length;
+            
+            if (currentRows >= MAX_INSTRUCTIONS) {
+                alert(`Maximum ${MAX_INSTRUCTIONS} instructions allowed.`);
+                return;
+            }
+
+            const container = document.querySelector('.instructions-container');
+            const instructionRow = document.createElement('div');
+            instructionRow.className = 'instruction-row';
+            
+            const newStepNumber = currentRows + 1;
+            
+            instructionRow.innerHTML = `
+                <div class="step-number">${String(newStepNumber).padStart(2, '0')}</div>
+                <input type="text" class="input-field instruction-input" placeholder="Enter instruction" maxlength="${MAX_CHAR_PER_INSTRUCTION}">
+                <button type="button" class="remove-btn">×</button>
+            `;
+            
+            // Find the last instruction row and insert after it
+            const existingRows = container.querySelectorAll('.instruction-row');
+            const lastRow = existingRows[existingRows.length - 1];
+            
+            if (lastRow) {
+                lastRow.insertAdjacentElement('afterend', instructionRow);
+            } else {
+                // If no existing rows, insert after the section header
+                const sectionHeader = container.querySelector('.section-header');
+                sectionHeader.insertAdjacentElement('afterend', instructionRow);
+            }
+            
+            // Add event listeners
+            const removeBtn = instructionRow.querySelector('.remove-btn');
+            const input = instructionRow.querySelector('.instruction-input');
+            
+            removeBtn.addEventListener('click', () => removeInstruction(instructionRow));
+            input.addEventListener('input', updateStatusBar);
+            
+            updateStatusBar();
+        }
+
+        function removeInstruction(row) {
+            if (document.querySelectorAll('.instruction-row').length <= 1) {
+                alert('At least one instruction is required.');
+                return;
+            }
+            
+            row.remove();
+            updateStepNumbers();
+            updateStatusBar();
+        }
+
+        function validateProcedure(title, instructions) {
+            const errors = [];
+            
+            if (!title || title.trim().length === 0) {
+                errors.push('Title is required.');
+            }
+            
+            if (title && title.length > 100) {
+                errors.push('Title must be 100 characters or less.');
+            }
+            
+            if (instructions.length === 0) {
+                errors.push('At least one instruction is required.');
+            }
+            
+            if (instructions.length > MAX_INSTRUCTIONS) {
+                errors.push(`Maximum ${MAX_INSTRUCTIONS} instructions allowed.`);
+            }
+            
+            instructions.forEach((instruction, index) => {
+                if (instruction.length > MAX_CHAR_PER_INSTRUCTION) {
+                    errors.push(`Instruction ${index + 1} exceeds ${MAX_CHAR_PER_INSTRUCTION} character limit.`);
+                }
+                
+                if (checkProfanity(instruction)) {
+                    errors.push(`Instruction ${index + 1} contains inappropriate language.`);
+                }
+            });
+            
+            if (checkProfanity(title)) {
+                errors.push('Title contains inappropriate language.');
+            }
+            
+            return errors;
+        }
+
+        function generateProcedure() {
+            const titleInput = document.querySelector('.form-group input[type="text"]');
+            const title = titleInput.value.trim();
+            const instructions = getInstructions();
+            
+            const errors = validateProcedure(title, instructions);
+            
+            if (errors.length > 0) {
+                alert('Validation errors:\n\n' + errors.join('\n'));
+                return;
+            }
+            
+            const uid = generateUID();
+            const sanitizedTitle = sanitizeForFilename(title);
+            const filename = `${sanitizedTitle}_${uid}`;
+            
+            const procedure = {
+                title: title,
+                instructions: instructions.map((instruction, index) => ({
+                    step: index + 1,
+                    instruction: instruction
+                }))
+            };
+            
+            currentProcedure = {
+                data: procedure,
+                filename: filename,
+                uid: filename // Using filename as UID for simplicity
+            };
+            
+            displayOutput();
+        }
+
+        function displayOutput() {
+            const outputPanel = document.querySelector('.output-panel');
+            const jsonDisplay = document.querySelector('.json-display');
+            const infoSection = document.querySelector('.info-section');
+            
+            const jsonString = JSON.stringify(currentProcedure.data, null, 2);
+            jsonDisplay.textContent = jsonString;
+            
+            const repoUrl = 'https://yourusername.github.io/Meta-Raybans-Procedures';
+            const fileUrl = `${repoUrl}/procedures/${currentProcedure.filename}.json`;
+            
+            infoSection.innerHTML = `
+                <strong>Filename:</strong> <code>procedures/${currentProcedure.filename}.json</code><br>
+                <strong>Procedure ID:</strong> <code>${currentProcedure.uid}</code><br>
+                <strong>GitHub URL:</strong> <code>${fileUrl}</code><br>
+                <strong>NFC Content:</strong> <code>${currentProcedure.uid}|${fileUrl}</code>
+            `;
+            
+            outputPanel.style.display = 'block';
+            outputPanel.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function copyToClipboard() {
+            const jsonDisplay = document.querySelector('.json-display');
+            navigator.clipboard.writeText(jsonDisplay.textContent).then(() => {
+                const copyBtn = document.querySelector('.action-btn');
+                const originalText = copyBtn.textContent;
+                copyBtn.textContent = 'COPIED!';
+                copyBtn.style.background = '#059669';
+                setTimeout(() => {
+                    copyBtn.textContent = originalText;
+                    copyBtn.style.background = '#1e3a8a';
+                }, 2000);
+            }).catch(() => {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = jsonDisplay.textContent;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                const copyBtn = document.querySelector('.action-btn');
+                const originalText = copyBtn.textContent;
+                copyBtn.textContent = 'COPIED!';
+                setTimeout(() => {
+                    copyBtn.textContent = originalText;
+                }, 2000);
+            });
+        }
+
+        function downloadFile() {
+            if (!currentProcedure) {
+                alert('No procedure generated yet.');
+                return;
+            }
+            
+            const jsonString = JSON.stringify(currentProcedure.data, null, 2);
+            const blob = new Blob([jsonString], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${currentProcedure.filename}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Form submission
+            const form = document.querySelector('form');
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                generateProcedure();
+            });
+            
+            // Add instruction button
+            const addBtn = document.querySelector('.add-btn');
+            addBtn.addEventListener('click', addInstruction);
+            
+            // Remove instruction buttons (for initial rows)
+            document.querySelectorAll('.remove-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    removeInstruction(this.closest('.instruction-row'));
+                });
+            });
+            
+            // Input validation
+            document.querySelectorAll('.instruction-input').forEach(input => {
+                input.addEventListener('input', updateStatusBar);
+                input.setAttribute('maxlength', MAX_CHAR_PER_INSTRUCTION);
+            });
+            
+            // Title input validation
+            const titleInput = document.querySelector('.form-group input[type="text"]');
+            titleInput.addEventListener('input', updateStatusBar);
+            
+            // Action buttons
+            const actionBtns = document.querySelectorAll('.action-btn');
+            actionBtns[0].addEventListener('click', copyToClipboard); // Copy button
+            actionBtns[1].addEventListener('click', downloadFile); // Download button
+            
+            // Initial status update
+            updateStatusBar();
+            
+            // Hide output panel initially
+            document.querySelector('.output-panel').style.display = 'none';
+        });
+    </script>
+</body>
+</html>

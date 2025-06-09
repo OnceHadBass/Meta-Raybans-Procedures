@@ -24,25 +24,47 @@
         .container {
             max-width: 800px;
             margin: 0 auto;
-            padding: 24px;
+            padding: 16px;
+        }
+
+        /* Mobile responsive padding */
+        @media (min-width: 768px) {
+            .container {
+                padding: 24px;
+            }
         }
 
         .header {
             background: #ffffff;
             border: 1px solid #e5e7eb;
-            padding: 32px;
-            margin-bottom: 24px;
+            padding: 20px;
+            margin-bottom: 16px;
             text-align: center;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
         }
 
+        /* Responsive header */
+        @media (min-width: 768px) {
+            .header {
+                padding: 32px;
+                margin-bottom: 24px;
+            }
+        }
+
         .header h1 {
-            font-size: 28px;
+            font-size: 24px;
             font-weight: 700;
             color: #1e3a8a;
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-bottom: 8px;
+        }
+
+        /* Larger header on desktop */
+        @media (min-width: 768px) {
+            .header h1 {
+                font-size: 28px;
+            }
         }
 
         .header p {
@@ -56,12 +78,26 @@
         .main-panel {
             background: #ffffff;
             border: 1px solid #e5e7eb;
-            padding: 32px;
+            padding: 20px;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
         }
 
+        /* Responsive main panel */
+        @media (min-width: 768px) {
+            .main-panel {
+                padding: 32px;
+            }
+        }
+
         .form-group {
-            margin-bottom: 24px;
+            margin-bottom: 20px;
+        }
+
+        /* Responsive form spacing */
+        @media (min-width: 768px) {
+            .form-group {
+                margin-bottom: 24px;
+            }
         }
 
         .form-label {
@@ -86,6 +122,14 @@
             transition: all 0.2s ease;
         }
 
+        /* Better touch targets on mobile */
+        @media (max-width: 767px) {
+            .input-field {
+                padding: 14px 16px;
+                font-size: 16px; /* Prevents zoom on iOS */
+            }
+        }
+
         .input-field:focus {
             outline: none;
             border-color: #1e3a8a;
@@ -99,8 +143,15 @@
         .instructions-container {
             background: #f9fafb;
             border: 1px solid #e5e7eb;
-            padding: 20px;
+            padding: 16px;
             margin-bottom: 16px;
+        }
+
+        /* Responsive instructions container */
+        @media (min-width: 768px) {
+            .instructions-container {
+                padding: 20px;
+            }
         }
 
         .section-header {
@@ -114,11 +165,61 @@
             border-bottom: 1px solid #e5e7eb;
         }
 
+        .instruction-container {
+            margin-bottom: 8px;
+        }
+
         .instruction-row {
             display: flex;
-            gap: 12px;
-            margin-bottom: 12px;
+            gap: 8px;
+            margin-bottom: 8px;
             align-items: center;
+        }
+
+        /* Responsive instruction row */
+        @media (min-width: 768px) {
+            .instruction-row {
+                gap: 12px;
+                margin-bottom: 8px;
+            }
+        }
+
+        .insert-button-row {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 8px;
+        }
+
+        .insert-btn {
+            background: #f3f4f6;
+            color: #6b7280;
+            border: 1px solid #d1d5db;
+            width: 28px;
+            height: 28px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+
+        .insert-btn:hover {
+            background: #1e3a8a;
+            color: #ffffff;
+            border-color: #1e3a8a;
+            transform: scale(1.1);
+        }
+
+        /* Larger touch targets on mobile */
+        @media (max-width: 767px) {
+            .insert-btn {
+                width: 32px;
+                height: 32px;
+                font-size: 16px;
+            }
         }
 
         .step-number {
@@ -132,6 +233,14 @@
             font-weight: 600;
             font-size: 12px;
             flex-shrink: 0;
+        }
+
+        /* Larger touch targets on mobile */
+        @media (max-width: 767px) {
+            .step-number {
+                width: 36px;
+                height: 36px;
+            }
         }
 
         .instruction-input {
@@ -153,6 +262,15 @@
             justify-content: center;
         }
 
+        /* Larger touch targets on mobile */
+        @media (max-width: 767px) {
+            .remove-btn {
+                width: 36px;
+                height: 36px;
+                font-size: 16px;
+            }
+        }
+
         .remove-btn:hover {
             background: #dc2626;
         }
@@ -171,12 +289,20 @@
             transition: all 0.2s ease;
         }
 
+        /* Better mobile buttons */
+        @media (max-width: 767px) {
+            .add-btn {
+                padding: 12px 16px;
+                font-size: 13px;
+            }
+        }
+
         .add-btn:hover {
             background: #1e40af;
         }
 
         .upload-btn {
-            background: #059669;
+            background: #dc2626; /* Changed from green to red */
             color: #ffffff;
             border: none;
             padding: 10px 16px;
@@ -189,8 +315,31 @@
             transition: all 0.2s ease;
         }
 
+        /* Better mobile buttons */
+        @media (max-width: 767px) {
+            .upload-btn {
+                padding: 12px 16px;
+                font-size: 13px;
+            }
+        }
+
         .upload-btn:hover {
-            background: #047857;
+            background: #b91c1c; /* Darker red on hover */
+        }
+
+        /* Responsive button container */
+        .button-container {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        @media (min-width: 768px) {
+            .button-container {
+                gap: 12px;
+                flex-wrap: nowrap;
+            }
         }
 
         .generate-btn {
@@ -208,6 +357,14 @@
             transition: all 0.2s ease;
         }
 
+        /* Better mobile generate button */
+        @media (max-width: 767px) {
+            .generate-btn {
+                padding: 18px 24px;
+                font-size: 16px;
+            }
+        }
+
         .generate-btn:hover {
             background: #e5e7eb;
             border-color: #9ca3af;
@@ -218,15 +375,23 @@
         .output-panel {
             background: #ffffff;
             border: 1px solid #e5e7eb;
-            padding: 24px;
-            margin-top: 24px;
+            padding: 20px;
+            margin-top: 16px;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Responsive output panel */
+        @media (min-width: 768px) {
+            .output-panel {
+                padding: 24px;
+                margin-top: 24px;
+            }
         }
 
         .output-header {
             font-size: 12px;
             font-weight: 600;
-            color: #059669;
+            color: #dc2626; /* Changed from green to red */
             text-transform: uppercase;
             letter-spacing: 0.5px;
             margin-bottom: 16px;
@@ -246,10 +411,27 @@
             margin-bottom: 16px;
         }
 
+        /* Better mobile code display */
+        @media (max-width: 767px) {
+            .json-display {
+                font-size: 12px;
+                padding: 12px;
+            }
+        }
+
         .action-buttons {
             display: flex;
-            gap: 12px;
+            gap: 8px;
             margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* Responsive action buttons */
+        @media (min-width: 768px) {
+            .action-buttons {
+                gap: 12px;
+                flex-wrap: nowrap;
+            }
         }
 
         .action-btn {
@@ -264,6 +446,22 @@
             letter-spacing: 0.5px;
             cursor: pointer;
             transition: all 0.2s ease;
+            flex: 1;
+        }
+
+        /* Better mobile action buttons */
+        @media (max-width: 767px) {
+            .action-btn {
+                padding: 12px 16px;
+                font-size: 13px;
+                min-width: 120px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .action-btn {
+                flex: initial;
+            }
         }
 
         .action-btn:hover {
@@ -290,6 +488,15 @@
             font-family: 'SF Mono', monospace;
             font-size: 12px;
             color: #475569;
+            word-break: break-all;
+        }
+
+        /* Better mobile code blocks */
+        @media (max-width: 767px) {
+            .info-section code {
+                font-size: 11px;
+                padding: 3px 6px;
+            }
         }
 
         .status-bar {
@@ -303,14 +510,94 @@
             color: #6b7280;
             font-weight: 500;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            max-width: calc(100vw - 32px);
+            word-wrap: break-word;
+        }
+
+        /* Mobile status bar */
+        @media (max-width: 767px) {
+            .status-bar {
+                position: relative;
+                bottom: auto;
+                right: auto;
+                margin-top: 16px;
+                font-size: 10px;
+                text-align: center;
+            }
         }
 
         .status-valid {
-            color: #059669;
+            color: #dc2626; /* Changed from green to red */
         }
 
         .status-invalid {
             color: #dc2626;
+        }
+
+        /* QR Code and NFC section styles */
+        .qr-nfc-section {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 20px;
+            margin-top: 16px;
+            text-align: center;
+        }
+
+        .qr-nfc-header {
+            font-size: 12px;
+            font-weight: 600;
+            color: #1e3a8a;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .qr-code-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #d1d5db;
+            margin-bottom: 16px;
+            display: inline-block;
+        }
+
+        .nfc-string {
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            padding: 12px;
+            font-family: 'SF Mono', monospace;
+            font-size: 12px;
+            color: #475569;
+            word-break: break-all;
+            margin-bottom: 12px;
+        }
+
+        /* Responsive QR/NFC section */
+        @media (max-width: 767px) {
+            .nfc-string {
+                font-size: 11px;
+                padding: 10px;
+            }
+        }
+
+        .copy-nfc-btn {
+            background: #dc2626;
+            color: #ffffff;
+            border: none;
+            padding: 8px 16px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .copy-nfc-btn:hover {
+            background: #b91c1c;
         }
     </style>
 </head>
@@ -332,23 +619,38 @@
                     <label class="form-label">Instructions</label>
                     <div class="instructions-container">
                         <div class="section-header">Procedure Steps</div>
-                        <div class="instruction-row">
-                            <div class="step-number">01</div>
-                            <input type="text" class="input-field instruction-input" placeholder="Enter first instruction">
-                            <button type="button" class="remove-btn">×</button>
+                        <div class="instruction-container">
+                            <div class="instruction-row">
+                                <div class="step-number">01</div>
+                                <input type="text" class="input-field instruction-input" placeholder="Enter first instruction">
+                                <button type="button" class="remove-btn">×</button>
+                            </div>
+                            <div class="insert-button-row">
+                                <button type="button" class="insert-btn" title="Insert step here">+</button>
+                            </div>
                         </div>
-                        <div class="instruction-row">
-                            <div class="step-number">02</div>
-                            <input type="text" class="input-field instruction-input" placeholder="Enter second instruction">
-                            <button type="button" class="remove-btn">×</button>
+                        <div class="instruction-container">
+                            <div class="instruction-row">
+                                <div class="step-number">02</div>
+                                <input type="text" class="input-field instruction-input" placeholder="Enter second instruction">
+                                <button type="button" class="remove-btn">×</button>
+                            </div>
+                            <div class="insert-button-row">
+                                <button type="button" class="insert-btn" title="Insert step here">+</button>
+                            </div>
                         </div>
-                        <div class="instruction-row">
-                            <div class="step-number">03</div>
-                            <input type="text" class="input-field instruction-input" placeholder="Enter third instruction">
-                            <button type="button" class="remove-btn">×</button>
+                        <div class="instruction-container">
+                            <div class="instruction-row">
+                                <div class="step-number">03</div>
+                                <input type="text" class="input-field instruction-input" placeholder="Enter third instruction">
+                                <button type="button" class="remove-btn">×</button>
+                            </div>
+                            <div class="insert-button-row">
+                                <button type="button" class="insert-btn" title="Insert step here">+</button>
+                            </div>
                         </div>
                     </div>
-                    <div style="display: flex; gap: 12px; align-items: center;">
+                    <div class="button-container">
                         <button type="button" class="add-btn">+ Add Instruction</button>
                         <button type="button" class="upload-btn">Upload JSON</button>
                         <input type="file" id="json-upload" accept=".json" style="display: none;">
@@ -363,6 +665,7 @@
                 
                 <div class="json-display">{
   "title": "Coffee Machine Initialization Sequence",
+  "uid": "x7k9m2ab",
   "instructions": [
     {"step": 1, "instruction": "Power on main unit and wait for startup"},
     {"step": 2, "instruction": "Fill water reservoir to maximum line"},
@@ -380,6 +683,18 @@
                     <strong>Procedure ID:</strong> <code>coffee_machine_init_x7k9m2</code><br>
                     <strong>GitHub URL:</strong> <code>https://yourusername.github.io/Meta-Raybans-Procedures/procedures/coffee_machine_init_x7k9m2.json</code>
                 </div>
+
+                <div class="qr-nfc-section">
+                    <div class="qr-nfc-header">NFC Tag & QR Code</div>
+                    
+                    <div class="qr-code-container">
+                        <canvas id="qr-canvas" width="200" height="200"></canvas>
+                    </div>
+                    
+                    <div class="nfc-string" id="nfc-string">coffee_machine_init_x7k9m2|https://yourusername.github.io/Meta-Raybans-Procedures/procedures/coffee_machine_init_x7k9m2.json</div>
+                    
+                    <button class="copy-nfc-btn" onclick="copyNFCString()">Copy NFC String</button>
+                </div>
             </div>
         </div>
     </div>
@@ -388,6 +703,7 @@
         <span class="status-valid">INSTRUCTIONS: 3/50 • CHARS: 127/200 • STATUS: VALID</span>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
     <script>
         // Configuration
         const MAX_INSTRUCTIONS = 50;
@@ -430,6 +746,65 @@
             });
         }
 
+        function addInsertButton(afterElement) {
+            const insertRow = document.createElement('div');
+            insertRow.className = 'insert-button-row';
+            insertRow.innerHTML = '<button type="button" class="insert-btn" title="Insert step here">+</button>';
+            
+            const insertBtn = insertRow.querySelector('.insert-btn');
+            insertBtn.addEventListener('click', () => insertInstruction(insertRow));
+            
+            afterElement.insertAdjacentElement('afterend', insertRow);
+        }
+
+        function createInstructionContainer(instructionText = '') {
+            const container = document.createElement('div');
+            container.className = 'instruction-container';
+            
+            container.innerHTML = `
+                <div class="instruction-row">
+                    <div class="step-number">00</div>
+                    <input type="text" class="input-field instruction-input" placeholder="Enter instruction" maxlength="${MAX_CHAR_PER_INSTRUCTION}" value="${instructionText}">
+                    <button type="button" class="remove-btn">×</button>
+                </div>
+                <div class="insert-button-row">
+                    <button type="button" class="insert-btn" title="Insert step here">+</button>
+                </div>
+            `;
+            
+            // Add event listeners
+            const removeBtn = container.querySelector('.remove-btn');
+            const input = container.querySelector('.instruction-input');
+            const insertBtn = container.querySelector('.insert-btn');
+            
+            removeBtn.addEventListener('click', () => removeInstruction(container));
+            input.addEventListener('input', updateStatusBar);
+            insertBtn.addEventListener('click', () => insertInstruction(container));
+            
+            return container;
+        }
+
+        function insertInstruction(instructionContainer) {
+            const currentRows = document.querySelectorAll('.instruction-row').length;
+            
+            if (currentRows >= MAX_INSTRUCTIONS) {
+                alert(`Maximum ${MAX_INSTRUCTIONS} instructions allowed.`);
+                return;
+            }
+
+            const newContainer = createInstructionContainer();
+            
+            // Insert the new container right AFTER the current container
+            instructionContainer.insertAdjacentElement('afterend', newContainer);
+            
+            // Focus the new input
+            const newInput = newContainer.querySelector('.instruction-input');
+            newInput.focus();
+            
+            updateStepNumbers();
+            updateStatusBar();
+        }
+
         function updateStatusBar() {
             const instructions = getInstructions();
             const totalChars = instructions.reduce((sum, inst) => sum + inst.length, 0);
@@ -460,25 +835,17 @@
             const instructionRow = document.createElement('div');
             instructionRow.className = 'instruction-row';
             
-            const newStepNumber = currentRows + 1;
-            
             instructionRow.innerHTML = `
-                <div class="step-number">${String(newStepNumber).padStart(2, '0')}</div>
+                <div class="step-number">00</div>
                 <input type="text" class="input-field instruction-input" placeholder="Enter instruction" maxlength="${MAX_CHAR_PER_INSTRUCTION}">
                 <button type="button" class="remove-btn">×</button>
             `;
             
-            // Find the last instruction row and insert after it
-            const existingRows = container.querySelectorAll('.instruction-row');
-            const lastRow = existingRows[existingRows.length - 1];
+            // Add to the end of the container (before the button container)
+            container.appendChild(instructionRow);
             
-            if (lastRow) {
-                lastRow.insertAdjacentElement('afterend', instructionRow);
-            } else {
-                // If no existing rows, insert after the section header
-                const sectionHeader = container.querySelector('.section-header');
-                sectionHeader.insertAdjacentElement('afterend', instructionRow);
-            }
+            // Add insert button after this instruction
+            addInsertButton(instructionRow);
             
             // Add event listeners
             const removeBtn = instructionRow.querySelector('.remove-btn');
@@ -487,6 +854,7 @@
             removeBtn.addEventListener('click', () => removeInstruction(instructionRow));
             input.addEventListener('input', updateStatusBar);
             
+            updateStepNumbers();
             updateStatusBar();
         }
 
@@ -529,40 +897,16 @@
             const titleInput = document.querySelector('.form-group input[type="text"]');
             titleInput.value = jsonData.title;
 
-            // Add instructions in correct order (first to last)
+            // Add instructions in correct order
             const container = document.querySelector('.instructions-container');
-            const sectionHeader = container.querySelector('.section-header');
-
-            // Create all instruction rows first, then insert them in order
-            const instructionElements = [];
             
             jsonData.instructions.forEach((instructionObj, index) => {
                 const instruction = instructionObj.instruction || instructionObj;
-                
-                const instructionRow = document.createElement('div');
-                instructionRow.className = 'instruction-row';
-                
-                instructionRow.innerHTML = `
-                    <div class="step-number">${String(index + 1).padStart(2, '0')}</div>
-                    <input type="text" class="input-field instruction-input" placeholder="Enter instruction" maxlength="${MAX_CHAR_PER_INSTRUCTION}" value="${instruction}">
-                    <button type="button" class="remove-btn">×</button>
-                `;
-                
-                // Add event listeners
-                const removeBtn = instructionRow.querySelector('.remove-btn');
-                const input = instructionRow.querySelector('.instruction-input');
-                
-                removeBtn.addEventListener('click', () => removeInstruction(instructionRow));
-                input.addEventListener('input', updateStatusBar);
-                
-                instructionElements.push(instructionRow);
+                const newContainer = createInstructionContainer(instruction);
+                container.appendChild(newContainer);
             });
 
-            // Insert all elements in the correct order (append after section header)
-            instructionElements.forEach(element => {
-                container.appendChild(element);
-            });
-
+            updateStepNumbers();
             updateStatusBar();
             
             // Show success message
@@ -574,9 +918,9 @@
             const titleInput = document.querySelector('.form-group input[type="text"]');
             titleInput.value = '';
 
-            // Remove all existing instruction rows
-            const existingRows = document.querySelectorAll('.instruction-row');
-            existingRows.forEach(row => row.remove());
+            // Remove all existing instruction containers
+            const existingContainers = document.querySelectorAll('.instruction-container');
+            existingContainers.forEach(container => container.remove());
 
             // Hide output panel
             document.querySelector('.output-panel').style.display = 'none';
@@ -588,7 +932,22 @@
                 return;
             }
             
+            // Find the associated insert button (the one immediately after this instruction)
+            let nextElement = row.nextElementSibling;
+            let insertButtonToRemove = null;
+            
+            if (nextElement && nextElement.classList.contains('insert-button-row')) {
+                insertButtonToRemove = nextElement;
+            }
+            
+            // Remove the instruction row
             row.remove();
+            
+            // Remove the associated insert button
+            if (insertButtonToRemove) {
+                insertButtonToRemove.remove();
+            }
+            
             updateStepNumbers();
             updateStatusBar();
         }
@@ -647,6 +1006,7 @@
             
             const procedure = {
                 title: title,
+                uid: uid,
                 instructions: instructions.map((instruction, index) => ({
                     step: index + 1,
                     instruction: instruction
@@ -656,29 +1016,48 @@
             currentProcedure = {
                 data: procedure,
                 filename: filename,
-                uid: filename // Using filename as UID for simplicity
+                uid: uid
             };
             
             displayOutput();
+        }
+
+        function generateQRCode(text) {
+            const canvas = document.getElementById('qr-canvas');
+            const qr = new QRious({
+                element: canvas,
+                value: text,
+                size: 200,
+                background: '#ffffff',
+                foreground: '#000000',
+                level: 'M'
+            });
         }
 
         function displayOutput() {
             const outputPanel = document.querySelector('.output-panel');
             const jsonDisplay = document.querySelector('.json-display');
             const infoSection = document.querySelector('.info-section');
+            const nfcStringEl = document.getElementById('nfc-string');
             
             const jsonString = JSON.stringify(currentProcedure.data, null, 2);
             jsonDisplay.textContent = jsonString;
             
-            const repoUrl = 'https://yourusername.github.io/Meta-Raybans-Procedures';
+            const repoUrl = 'https://oncehadbass.github.io/Meta-Raybans-Procedures';
             const fileUrl = `${repoUrl}/procedures/${currentProcedure.filename}.json`;
+            const nfcString = `${currentProcedure.uid}|${fileUrl}`;
             
             infoSection.innerHTML = `
                 <strong>Filename:</strong> <code>procedures/${currentProcedure.filename}.json</code><br>
                 <strong>Procedure ID:</strong> <code>${currentProcedure.uid}</code><br>
                 <strong>GitHub URL:</strong> <code>${fileUrl}</code><br>
-                <strong>NFC Content:</strong> <code>${currentProcedure.uid}|${fileUrl}</code>
+                <strong>NFC Content:</strong> <code>${nfcString}</code>
             `;
+            
+            nfcStringEl.textContent = nfcString;
+            
+            // Generate QR code
+            generateQRCode(nfcString);
             
             outputPanel.style.display = 'block';
             outputPanel.scrollIntoView({ behavior: 'smooth' });
@@ -690,7 +1069,7 @@
                 const copyBtn = document.querySelector('.action-btn');
                 const originalText = copyBtn.textContent;
                 copyBtn.textContent = 'COPIED!';
-                copyBtn.style.background = '#059669';
+                copyBtn.style.background = '#dc2626';
                 setTimeout(() => {
                     copyBtn.textContent = originalText;
                     copyBtn.style.background = '#1e3a8a';
@@ -705,6 +1084,35 @@
                 document.body.removeChild(textArea);
                 
                 const copyBtn = document.querySelector('.action-btn');
+                const originalText = copyBtn.textContent;
+                copyBtn.textContent = 'COPIED!';
+                setTimeout(() => {
+                    copyBtn.textContent = originalText;
+                }, 2000);
+            });
+        }
+
+        function copyNFCString() {
+            const nfcString = document.getElementById('nfc-string').textContent;
+            navigator.clipboard.writeText(nfcString).then(() => {
+                const copyBtn = document.querySelector('.copy-nfc-btn');
+                const originalText = copyBtn.textContent;
+                copyBtn.textContent = 'COPIED!';
+                copyBtn.style.background = '#059669';
+                setTimeout(() => {
+                    copyBtn.textContent = originalText;
+                    copyBtn.style.background = '#dc2626';
+                }, 2000);
+            }).catch(() => {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = nfcString;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                const copyBtn = document.querySelector('.copy-nfc-btn');
                 const originalText = copyBtn.textContent;
                 copyBtn.textContent = 'COPIED!';
                 setTimeout(() => {
@@ -753,10 +1161,17 @@
             const fileInput = document.getElementById('json-upload');
             fileInput.addEventListener('change', handleJSONUpload);
             
-            // Remove instruction buttons (for initial rows)
+            // Remove instruction buttons (for initial containers)
             document.querySelectorAll('.remove-btn').forEach(btn => {
                 btn.addEventListener('click', function() {
-                    removeInstruction(this.closest('.instruction-row'));
+                    removeInstruction(this.closest('.instruction-container'));
+                });
+            });
+            
+            // Insert instruction buttons (for initial containers)
+            document.querySelectorAll('.insert-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    insertInstruction(this.closest('.instruction-container'));
                 });
             });
             

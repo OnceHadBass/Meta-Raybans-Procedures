@@ -41,6 +41,7 @@
             margin-bottom: 16px;
             text-align: center;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
         }
 
         /* Responsive header */
@@ -80,6 +81,7 @@
             border: 1px solid #e5e7eb;
             padding: 20px;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
         }
 
         /* Responsive main panel */
@@ -120,6 +122,7 @@
             font-size: 14px;
             font-weight: 400;
             transition: all 0.2s ease;
+            border-radius: 4px;
         }
 
         /* Better touch targets on mobile */
@@ -145,6 +148,7 @@
             border: 1px solid #e5e7eb;
             padding: 16px;
             margin-bottom: 16px;
+            border-radius: 4px;
         }
 
         /* Responsive instructions container */
@@ -233,6 +237,7 @@
             font-weight: 600;
             font-size: 12px;
             flex-shrink: 0;
+            border-radius: 4px;
         }
 
         /* Larger touch targets on mobile */
@@ -260,6 +265,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            border-radius: 4px;
         }
 
         /* Larger touch targets on mobile */
@@ -273,6 +279,10 @@
 
         .remove-btn:hover {
             background: #dc2626;
+        }
+
+        .add-btn, .upload-btn, .action-btn, .generate-btn, .copy-nfc-btn {
+             border-radius: 4px;
         }
 
         .add-btn {
@@ -378,6 +388,7 @@
             padding: 20px;
             margin-top: 16px;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
         }
 
         /* Responsive output panel */
@@ -409,6 +420,7 @@
             white-space: pre-wrap;
             overflow-x: auto;
             margin-bottom: 16px;
+            border-radius: 4px;
         }
 
         /* Better mobile code display */
@@ -448,6 +460,11 @@
             transition: all 0.2s ease;
             flex: 1;
         }
+        
+        .action-btn:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+        }
 
         /* Better mobile action buttons */
         @media (max-width: 767px) {
@@ -464,16 +481,25 @@
             }
         }
 
-        .action-btn:hover {
+        .action-btn:not(:disabled):hover {
             background: #1e40af;
+        }
+        
+        #upload-procedure-btn {
+            background-color: #16a34a; /* A nice green for upload */
+        }
+        
+        #upload-procedure-btn:not(:disabled):hover {
+            background-color: #15803d;
         }
 
         .info-section {
-            background: #ffffff;
+            background: #f9fafb;
             border: 1px solid #e5e7eb;
             padding: 16px;
             margin-bottom: 16px;
             font-size: 13px;
+            border-radius: 4px;
         }
 
         .info-section strong {
@@ -489,6 +515,7 @@
             font-size: 12px;
             color: #475569;
             word-break: break-all;
+            border-radius: 4px;
         }
 
         /* Better mobile code blocks */
@@ -512,6 +539,8 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
             max-width: calc(100vw - 32px);
             word-wrap: break-word;
+            border-radius: 4px;
+            z-index: 100;
         }
 
         /* Mobile status bar */
@@ -527,7 +556,7 @@
         }
 
         .status-valid {
-            color: #dc2626; /* Changed from green to red */
+            color: #15803d; 
         }
 
         .status-invalid {
@@ -541,6 +570,7 @@
             padding: 20px;
             margin-top: 16px;
             text-align: center;
+            border-radius: 8px;
         }
 
         .qr-nfc-header {
@@ -572,6 +602,7 @@
             color: #475569;
             word-break: break-all;
             margin-bottom: 12px;
+            border-radius: 4px;
         }
 
         /* Responsive QR/NFC section */
@@ -612,43 +643,13 @@
             <form>
                 <div class="form-group">
                     <label class="form-label">Procedure Title</label>
-                    <input type="text" class="input-field" placeholder="Coffee machine initialization sequence" required>
+                    <input type="text" id="procedure-title" class="input-field" placeholder="Coffee machine initialization sequence" required>
                 </div>
 
                 <div class="form-group">
                     <label class="form-label">Instructions</label>
-                    <div class="instructions-container">
-                        <div class="section-header">Procedure Steps</div>
-                        <div class="instruction-container">
-                            <div class="instruction-row">
-                                <div class="step-number">01</div>
-                                <input type="text" class="input-field instruction-input" placeholder="Enter first instruction">
-                                <button type="button" class="remove-btn">×</button>
-                            </div>
-                            <div class="insert-button-row">
-                                <button type="button" class="insert-btn" title="Insert step here">+</button>
-                            </div>
-                        </div>
-                        <div class="instruction-container">
-                            <div class="instruction-row">
-                                <div class="step-number">02</div>
-                                <input type="text" class="input-field instruction-input" placeholder="Enter second instruction">
-                                <button type="button" class="remove-btn">×</button>
-                            </div>
-                            <div class="insert-button-row">
-                                <button type="button" class="insert-btn" title="Insert step here">+</button>
-                            </div>
-                        </div>
-                        <div class="instruction-container">
-                            <div class="instruction-row">
-                                <div class="step-number">03</div>
-                                <input type="text" class="input-field instruction-input" placeholder="Enter third instruction">
-                                <button type="button" class="remove-btn">×</button>
-                            </div>
-                            <div class="insert-button-row">
-                                <button type="button" class="insert-btn" title="Insert step here">+</button>
-                            </div>
-                        </div>
+                    <div class="instructions-container" id="instructions-container">
+                        <!-- Instructions will be dynamically added here -->
                     </div>
                     <div class="button-container">
                         <button type="button" class="add-btn">+ Add Instruction</button>
@@ -663,104 +664,84 @@
             <div class="output-panel" style="display: none;">
                 <div class="output-header">Generated Procedure</div>
                 
-                <div class="json-display">{
-  "title": "Coffee Machine Initialization Sequence",
-  "uid": "x7k9m2ab",
-  "instructions": [
-    {"step": 1, "instruction": "Power on main unit and wait for startup"},
-    {"step": 2, "instruction": "Fill water reservoir to maximum line"},
-    {"step": 3, "instruction": "Insert coffee pod and close chamber"}
-  ]
-}</div>
+                <div class="json-display"></div>
                 
                 <div class="action-buttons">
-                    <button class="action-btn">Copy JSON</button>
-                    <button class="action-btn">Download File</button>
+                    <button class="action-btn" id="copy-json-btn">Copy JSON</button>
+                    <button class="action-btn" id="download-file-btn">Download File</button>
+                    <button class="action-btn" id="upload-procedure-btn">Upload & Get Link</button>
                 </div>
 
-                <div class="info-section">
-                    <strong>Filename:</strong> <code>procedures/coffee_machine_init_x7k9m2.json</code><br>
-                    <strong>Procedure ID:</strong> <code>coffee_machine_init_x7k9m2</code><br>
-                    <strong>GitHub URL:</strong> <code>https://yourusername.github.io/Meta-Raybans-Procedures/procedures/coffee_machine_init_x7k9m2.json</code>
-                </div>
-
-                <div class="qr-nfc-section">
-                    <div class="qr-nfc-header">NFC Tag & QR Code</div>
-                    
-                    <div class="qr-code-container">
-                        <canvas id="qr-canvas" width="200" height="200"></canvas>
+                <!-- This section will be hidden until upload is complete -->
+                <div id="links-section" style="display: none;">
+                    <div class="info-section"></div>
+                    <div class="qr-nfc-section">
+                        <div class="qr-nfc-header">NFC Tag & QR Code</div>
+                        <div class="qr-code-container">
+                            <canvas id="qr-canvas" width="200" height="200"></canvas>
+                        </div>
+                        <div class="nfc-string" id="nfc-string"></div>
+                        <button class="copy-nfc-btn">Copy NFC String</button>
                     </div>
-                    
-                    <div class="nfc-string" id="nfc-string">coffee_machine_init_x7k9m2|https://yourusername.github.io/Meta-Raybans-Procedures/procedures/coffee_machine_init_x7k9m2.json</div>
-                    
-                    <button class="copy-nfc-btn" onclick="copyNFCString()">Copy NFC String</button>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="status-bar">
-        <span class="status-valid">INSTRUCTIONS: 3/50 • CHARS: 127/200 • STATUS: VALID</span>
+        <span></span>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
     <script>
-        // Configuration
+        // --- CONFIGURATION ---
         const MAX_INSTRUCTIONS = 50;
         const MAX_CHAR_PER_INSTRUCTION = 200;
-        const PROFANITY_LIST = ['fucker', 'motherfucker', 'shitballs', 'cunt', 'twat', 'shit', 'fuck', 'ass', 'bitch']; // Add more as needed
+        const PROFANITY_LIST = ['fucker', 'motherfucker', 'shitballs', 'cunt', 'twat', 'shit', 'fuck', 'ass', 'bitch'];
 
-        // State
+        // --- STATE ---
         let currentProcedure = null;
 
-        // Utility functions
-        function generateUID() {
-            const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
-            let result = '';
-            for (let i = 0; i < 8; i++) {
-                result += chars.charAt(Math.floor(Math.random() * chars.length));
-            }
-            return result;
-        }
-
-        function sanitizeForFilename(title) {
-            return title.toLowerCase()
-                       .replace(/[^a-z0-9\s]/g, '')
-                       .replace(/\s+/g, '_')
-                       .substring(0, 30);
-        }
-
-        function checkProfanity(text) {
+        // --- DOM ELEMENTS ---
+        const DOMElements = {
+            form: document.querySelector('form'),
+            titleInput: document.getElementById('procedure-title'),
+            instructionsContainer: document.getElementById('instructions-container'),
+            addBtn: document.querySelector('.add-btn'),
+            uploadBtn: document.querySelector('.upload-btn'),
+            jsonUploadInput: document.getElementById('json-upload'),
+            statusBar: document.querySelector('.status-bar span'),
+            outputPanel: document.querySelector('.output-panel'),
+            jsonDisplay: document.querySelector('.json-display'),
+            copyJsonBtn: document.getElementById('copy-json-btn'),
+            downloadFileBtn: document.getElementById('download-file-btn'),
+            uploadProcedureBtn: document.getElementById('upload-procedure-btn'),
+            linksSection: document.getElementById('links-section'),
+            infoSection: document.querySelector('.info-section'),
+            qrCanvas: document.getElementById('qr-canvas'),
+            nfcStringEl: document.getElementById('nfc-string'),
+            copyNfcBtn: document.querySelector('.copy-nfc-btn')
+        };
+        
+        // --- UTILITY FUNCTIONS ---
+        const generateUID = () => (Math.random() + 1).toString(36).substring(2, 10);
+        const sanitizeForFilename = (title) => title.toLowerCase().replace(/[^a-z0-9\s]/g, '').replace(/\s+/g, '_').substring(0, 30);
+        const checkProfanity = (text) => {
             const lowerText = text.toLowerCase();
-            // Use word boundaries to match whole words only
-            return PROFANITY_LIST.some(word => {
-                const regex = new RegExp(`\\b${word}\\b`, 'i');
-                return regex.test(lowerText);
-            });
-        }
+            return PROFANITY_LIST.some(word => new RegExp(`\\b${word}\\b`, 'i').test(lowerText));
+        };
 
+        // --- CORE UI FUNCTIONS ---
         function updateStepNumbers() {
-            const stepNumbers = document.querySelectorAll('.step-number');
+            const stepNumbers = DOMElements.instructionsContainer.querySelectorAll('.step-number');
             stepNumbers.forEach((step, index) => {
                 step.textContent = String(index + 1).padStart(2, '0');
             });
         }
 
-        function addInsertButton(afterElement) {
-            const insertRow = document.createElement('div');
-            insertRow.className = 'insert-button-row';
-            insertRow.innerHTML = '<button type="button" class="insert-btn" title="Insert step here">+</button>';
-            
-            const insertBtn = insertRow.querySelector('.insert-btn');
-            insertBtn.addEventListener('click', () => insertInstruction(insertRow));
-            
-            afterElement.insertAdjacentElement('afterend', insertRow);
-        }
-
         function createInstructionContainer(instructionText = '') {
             const container = document.createElement('div');
             container.className = 'instruction-container';
-            
             container.innerHTML = `
                 <div class="instruction-row">
                     <div class="step-number">00</div>
@@ -769,232 +750,89 @@
                 </div>
                 <div class="insert-button-row">
                     <button type="button" class="insert-btn" title="Insert step here">+</button>
-                </div>
-            `;
+                </div>`;
             
-            // Add event listeners
-            const removeBtn = container.querySelector('.remove-btn');
-            const input = container.querySelector('.instruction-input');
-            const insertBtn = container.querySelector('.insert-btn');
-            
-            removeBtn.addEventListener('click', () => removeInstruction(container));
-            input.addEventListener('input', updateStatusBar);
-            insertBtn.addEventListener('click', () => insertInstruction(container));
+            container.querySelector('.remove-btn').addEventListener('click', () => removeInstruction(container));
+            container.querySelector('input').addEventListener('input', updateStatusBar);
+            container.querySelector('.insert-btn').addEventListener('click', () => insertInstruction(container));
             
             return container;
         }
-
-        function insertInstruction(instructionContainer) {
-            const currentRows = document.querySelectorAll('.instruction-row').length;
-            
-            if (currentRows >= MAX_INSTRUCTIONS) {
+        
+        function addInstruction(focus = true) {
+            if (DOMElements.instructionsContainer.querySelectorAll('.instruction-row').length >= MAX_INSTRUCTIONS) {
                 alert(`Maximum ${MAX_INSTRUCTIONS} instructions allowed.`);
                 return;
             }
-
             const newContainer = createInstructionContainer();
-            
-            // Insert the new container right AFTER the current container
-            instructionContainer.insertAdjacentElement('afterend', newContainer);
-            
-            // Focus the new input
-            const newInput = newContainer.querySelector('.instruction-input');
-            newInput.focus();
-            
+            DOMElements.instructionsContainer.appendChild(newContainer);
+            if (focus) newContainer.querySelector('input').focus();
             updateStepNumbers();
             updateStatusBar();
         }
 
+        function insertInstruction(relativeContainer) {
+            if (DOMElements.instructionsContainer.querySelectorAll('.instruction-row').length >= MAX_INSTRUCTIONS) {
+                alert(`Maximum ${MAX_INSTRUCTIONS} instructions allowed.`);
+                return;
+            }
+            const newContainer = createInstructionContainer();
+            relativeContainer.insertAdjacentElement('afterend', newContainer);
+            newContainer.querySelector('input').focus();
+            updateStepNumbers();
+            updateStatusBar();
+        }
+        
+        function removeInstruction(container) {
+            if (DOMElements.instructionsContainer.querySelectorAll('.instruction-row').length <= 1) {
+                alert('At least one instruction is required.');
+                return;
+            }
+            container.remove();
+            updateStepNumbers();
+            updateStatusBar();
+        }
+
+        function getInstructionsFromDOM() {
+            const inputs = DOMElements.instructionsContainer.querySelectorAll('.instruction-input');
+            return Array.from(inputs).map(input => input.value.trim());
+        }
+
         function updateStatusBar() {
-            const instructions = getInstructions();
+            const instructions = getInstructionsFromDOM();
+            const title = DOMElements.titleInput.value;
             const totalChars = instructions.reduce((sum, inst) => sum + inst.length, 0);
-            const hasErrors = instructions.some(inst => inst.length > MAX_CHAR_PER_INSTRUCTION || checkProfanity(inst));
-            const statusBar = document.querySelector('.status-bar span');
+            
+            const hasErrors = instructions.some(inst => inst.length > MAX_CHAR_PER_INSTRUCTION || checkProfanity(inst)) || checkProfanity(title);
             
             const status = hasErrors ? 'INVALID' : 'VALID';
             const statusClass = hasErrors ? 'status-invalid' : 'status-valid';
             
-            statusBar.textContent = `INSTRUCTIONS: ${instructions.length}/${MAX_INSTRUCTIONS} • CHARS: ${totalChars}/${MAX_CHAR_PER_INSTRUCTION * instructions.length} • STATUS: ${status}`;
-            statusBar.className = statusClass;
+            DOMElements.statusBar.textContent = `STEPS: ${instructions.filter(i => i).length}/${MAX_INSTRUCTIONS} • TITLE/STEPS STATUS: ${status}`;
+            DOMElements.statusBar.className = statusClass;
         }
-
-        function getInstructions() {
-            const inputs = document.querySelectorAll('.instruction-input');
-            return Array.from(inputs).map(input => input.value.trim()).filter(val => val.length > 0);
-        }
-
-        function addInstruction() {
-            const currentRows = document.querySelectorAll('.instruction-row').length;
-            
-            if (currentRows >= MAX_INSTRUCTIONS) {
-                alert(`Maximum ${MAX_INSTRUCTIONS} instructions allowed.`);
-                return;
-            }
-
-            const container = document.querySelector('.instructions-container');
-            const instructionRow = document.createElement('div');
-            instructionRow.className = 'instruction-row';
-            
-            instructionRow.innerHTML = `
-                <div class="step-number">00</div>
-                <input type="text" class="input-field instruction-input" placeholder="Enter instruction" maxlength="${MAX_CHAR_PER_INSTRUCTION}">
-                <button type="button" class="remove-btn">×</button>
-            `;
-            
-            // Add to the end of the container (before the button container)
-            container.appendChild(instructionRow);
-            
-            // Add insert button after this instruction
-            addInsertButton(instructionRow);
-            
-            // Add event listeners
-            const removeBtn = instructionRow.querySelector('.remove-btn');
-            const input = instructionRow.querySelector('.instruction-input');
-            
-            removeBtn.addEventListener('click', () => removeInstruction(instructionRow));
-            input.addEventListener('input', updateStatusBar);
-            
-            updateStepNumbers();
-            updateStatusBar();
-        }
-
-        function uploadJSON() {
-            document.getElementById('json-upload').click();
-        }
-
-        function handleJSONUpload(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-
-            if (!file.name.endsWith('.json')) {
-                alert('Please upload a JSON file.');
-                return;
-            }
-
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                try {
-                    const jsonData = JSON.parse(e.target.result);
-                    populateFormFromJSON(jsonData);
-                } catch (error) {
-                    alert('Invalid JSON file. Please check the format and try again.');
-                }
-            };
-            reader.readAsText(file);
-        }
-
-        function populateFormFromJSON(jsonData) {
-            // Validate JSON structure
-            if (!jsonData.title || !jsonData.instructions || !Array.isArray(jsonData.instructions)) {
-                alert('Invalid JSON format. Expected structure:\n{\n  "title": "...",\n  "instructions": [...]\n}');
-                return;
-            }
-
-            // Clear existing form
-            clearForm();
-
-            // Set title
-            const titleInput = document.querySelector('.form-group input[type="text"]');
-            titleInput.value = jsonData.title;
-
-            // Add instructions in correct order
-            const container = document.querySelector('.instructions-container');
-            
-            jsonData.instructions.forEach((instructionObj, index) => {
-                const instruction = instructionObj.instruction || instructionObj;
-                const newContainer = createInstructionContainer(instruction);
-                container.appendChild(newContainer);
-            });
-
-            updateStepNumbers();
-            updateStatusBar();
-            
-            // Show success message
-            alert(`Successfully loaded procedure: "${jsonData.title}" with ${jsonData.instructions.length} instructions.`);
-        }
-
-        function clearForm() {
-            // Clear title
-            const titleInput = document.querySelector('.form-group input[type="text"]');
-            titleInput.value = '';
-
-            // Remove all existing instruction containers
-            const existingContainers = document.querySelectorAll('.instruction-container');
-            existingContainers.forEach(container => container.remove());
-
-            // Hide output panel
-            document.querySelector('.output-panel').style.display = 'none';
-        }
-
-        function removeInstruction(row) {
-            if (document.querySelectorAll('.instruction-row').length <= 1) {
-                alert('At least one instruction is required.');
-                return;
-            }
-            
-            // Find the associated insert button (the one immediately after this instruction)
-            let nextElement = row.nextElementSibling;
-            let insertButtonToRemove = null;
-            
-            if (nextElement && nextElement.classList.contains('insert-button-row')) {
-                insertButtonToRemove = nextElement;
-            }
-            
-            // Remove the instruction row
-            row.remove();
-            
-            // Remove the associated insert button
-            if (insertButtonToRemove) {
-                insertButtonToRemove.remove();
-            }
-            
-            updateStepNumbers();
-            updateStatusBar();
-        }
-
+        
+        // --- PROCEDURE GENERATION & VALIDATION ---
         function validateProcedure(title, instructions) {
             const errors = [];
-            
-            if (!title || title.trim().length === 0) {
-                errors.push('Title is required.');
-            }
-            
-            if (title && title.length > 100) {
-                errors.push('Title must be 100 characters or less.');
-            }
-            
-            if (instructions.length === 0) {
-                errors.push('At least one instruction is required.');
-            }
-            
-            if (instructions.length > MAX_INSTRUCTIONS) {
-                errors.push(`Maximum ${MAX_INSTRUCTIONS} instructions allowed.`);
-            }
+            if (!title) errors.push('Title is required.');
+            if (title.length > 100) errors.push('Title must be 100 characters or less.');
+            if (checkProfanity(title)) errors.push('Title contains inappropriate language.');
+            if (instructions.length === 0 || instructions.every(i => !i)) errors.push('At least one instruction is required.');
+            if (instructions.length > MAX_INSTRUCTIONS) errors.push(`Maximum ${MAX_INSTRUCTIONS} instructions allowed.`);
             
             instructions.forEach((instruction, index) => {
-                if (instruction.length > MAX_CHAR_PER_INSTRUCTION) {
-                    errors.push(`Instruction ${index + 1} exceeds ${MAX_CHAR_PER_INSTRUCTION} character limit.`);
-                }
-                
-                if (checkProfanity(instruction)) {
-                    errors.push(`Instruction ${index + 1} contains inappropriate language.`);
-                }
+                if (instruction.length > MAX_CHAR_PER_INSTRUCTION) errors.push(`Step ${index + 1} exceeds ${MAX_CHAR_PER_INSTRUCTION} character limit.`);
+                if (checkProfanity(instruction)) errors.push(`Step ${index + 1} contains inappropriate language.`);
             });
-            
-            if (checkProfanity(title)) {
-                errors.push('Title contains inappropriate language.');
-            }
-            
             return errors;
         }
 
-        function generateProcedure() {
-            const titleInput = document.querySelector('.form-group input[type="text"]');
-            const title = titleInput.value.trim();
-            const instructions = getInstructions();
+        function handleGenerateProcedure() {
+            const title = DOMElements.titleInput.value.trim();
+            const instructions = getInstructionsFromDOM().filter(val => val.length > 0);
             
             const errors = validateProcedure(title, instructions);
-            
             if (errors.length > 0) {
                 alert('Validation errors:\n\n' + errors.join('\n'));
                 return;
@@ -1002,200 +840,182 @@
             
             const uid = generateUID();
             const sanitizedTitle = sanitizeForFilename(title);
-            const filename = `${sanitizedTitle}_${uid}`;
-            
-            const procedure = {
-                title: title,
-                uid: uid,
-                instructions: instructions.map((instruction, index) => ({
-                    step: index + 1,
-                    instruction: instruction
-                }))
-            };
             
             currentProcedure = {
-                data: procedure,
-                filename: filename,
-                uid: uid
+                data: {
+                    title: title,
+                    uid: uid,
+                    instructions: instructions.map((inst, i) => ({ step: i + 1, instruction: inst }))
+                },
+                filename: `${sanitizedTitle}_${uid}`
             };
             
-            displayOutput();
+            displayInitialOutput();
+        }
+
+        // --- OUTPUT & UPLOAD ---
+        function displayInitialOutput() {
+            const jsonString = JSON.stringify(currentProcedure.data, null, 2);
+            DOMElements.jsonDisplay.textContent = jsonString;
+            DOMElements.outputPanel.style.display = 'block';
+            DOMElements.linksSection.style.display = 'none'; // Hide links until uploaded
+            DOMElements.uploadProcedureBtn.disabled = false;
+            DOMElements.uploadProcedureBtn.textContent = 'Upload & Get Link';
+            DOMElements.outputPanel.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        async function uploadProcedure() {
+            if (!currentProcedure) return;
+
+            // THIS IS THE URL OF YOUR NEW GLITCH PROXY SERVER
+            const proxyUrl = "https://carnation-jet-apparel.glitch.me/upload";
+
+            const uploadBtn = DOMElements.uploadProcedureBtn;
+            const originalButtonText = uploadBtn.textContent;
+            uploadBtn.disabled = true;
+            uploadBtn.textContent = 'Uploading...';
+
+            // Create a Blob from the procedure JSON
+            const procedureJSON = JSON.stringify(currentProcedure.data, null, 2);
+            const blob = new Blob([procedureJSON], { type: 'application/json' });
+
+            // Use FormData to send the file to your proxy
+            const formData = new FormData();
+            formData.append('file', blob, `${currentProcedure.filename}.json`);
+
+            try {
+                const response = await fetch(proxyUrl, {
+                    method: 'POST',
+                    body: formData // No 'Content-Type' header needed; the browser sets it for FormData
+                });
+
+                const result = await response.json();
+
+                if (!response.ok) {
+                    // Use the error message from the server if available
+                    throw new Error(result.error || `Server responded with status: ${response.status}`);
+                }
+
+                // The server sends back { url: '...' } on success
+                const fileUrl = result.url;
+                uploadBtn.textContent = 'Upload Complete';
+                displayFinalLinks(fileUrl);
+
+            } catch (error) {
+                console.error('Upload error:', error);
+                alert(`Failed to upload procedure. Please try again.\nError: ${error.message}`);
+                uploadBtn.disabled = false;
+                uploadBtn.textContent = originalButtonText;
+            }
+        }
+        
+        function displayFinalLinks(fileUrl) {
+            // NOTE: The trigger page URL should point to your actual trigger page on GitHub pages
+            const triggerPageBaseUrl = 'https://oncehadbass.github.io/Meta-Raybans-Procedures/trigger.html';
+            const qrUrl = `${triggerPageBaseUrl}?uid=${currentProcedure.data.uid}&url=${encodeURIComponent(fileUrl)}`;
+            const nfcString = `${currentProcedure.data.uid}|${fileUrl}`;
+
+            DOMElements.infoSection.innerHTML = `
+                <strong>Filename:</strong> <code>${currentProcedure.filename}.json</code><br>
+                <strong>Procedure ID:</strong> <code>${currentProcedure.data.uid}</code><br>
+                <strong>Live URL (0x0.st):</strong> <code>${fileUrl}</code><br>
+                <strong>NFC Content:</strong> <code>${nfcString}</code><br>
+                <strong>QR Trigger URL:</strong> <code>${qrUrl}</code>`;
+            
+            DOMElements.nfcStringEl.textContent = nfcString;
+            generateQRCode(qrUrl);
+            
+            DOMElements.linksSection.style.display = 'block';
+            DOMElements.linksSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        // --- FILE HANDLING & HELPERS ---
+        function handleJSONUpload(event) {
+            const file = event.target.files[0];
+            if (!file || !file.name.endsWith('.json')) return;
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                try {
+                    const jsonData = JSON.parse(e.target.result);
+                    populateFormFromJSON(jsonData);
+                } catch (error) {
+                    alert('Invalid JSON file.');
+                }
+            };
+            reader.readAsText(file);
+        }
+
+        function populateFormFromJSON(data) {
+            if (!data.title || !data.instructions || !Array.isArray(data.instructions)) {
+                alert('Invalid JSON format.');
+                return;
+            }
+            DOMElements.titleInput.value = data.title;
+            DOMElements.instructionsContainer.innerHTML = ''; // Clear existing
+            data.instructions.forEach(item => {
+                const newContainer = createInstructionContainer(item.instruction || item);
+                DOMElements.instructionsContainer.appendChild(newContainer);
+            });
+            updateStepNumbers();
+            updateStatusBar();
+            alert(`Loaded "${data.title}" with ${data.instructions.length} steps.`);
         }
 
         function generateQRCode(text) {
-            const canvas = document.getElementById('qr-canvas');
-            const qr = new QRious({
-                element: canvas,
-                value: text,
-                size: 200,
-                background: '#ffffff',
-                foreground: '#000000',
-                level: 'M'
-            });
-        }
-
-        function displayOutput() {
-            const outputPanel = document.querySelector('.output-panel');
-            const jsonDisplay = document.querySelector('.json-display');
-            const infoSection = document.querySelector('.info-section');
-            const nfcStringEl = document.getElementById('nfc-string');
-            
-            const jsonString = JSON.stringify(currentProcedure.data, null, 2);
-            jsonDisplay.textContent = jsonString;
-            
-            const repoUrl = 'https://oncehadbass.github.io/Meta-Raybans-Procedures';
-            const fileUrl = `${repoUrl}/procedures/${currentProcedure.filename}.json`;
-            const nfcString = `${currentProcedure.uid}|${fileUrl}`;
-            
-            infoSection.innerHTML = `
-                <strong>Filename:</strong> <code>procedures/${currentProcedure.filename}.json</code><br>
-                <strong>Procedure ID:</strong> <code>${currentProcedure.uid}</code><br>
-                <strong>GitHub URL:</strong> <code>${fileUrl}</code><br>
-                <strong>NFC Content:</strong> <code>${nfcString}</code>
-            `;
-            
-            nfcStringEl.textContent = nfcString;
-            
-            // Generate QR code
-            generateQRCode(nfcString);
-            
-            outputPanel.style.display = 'block';
-            outputPanel.scrollIntoView({ behavior: 'smooth' });
-        }
-
-        function copyToClipboard() {
-            const jsonDisplay = document.querySelector('.json-display');
-            navigator.clipboard.writeText(jsonDisplay.textContent).then(() => {
-                const copyBtn = document.querySelector('.action-btn');
-                const originalText = copyBtn.textContent;
-                copyBtn.textContent = 'COPIED!';
-                copyBtn.style.background = '#dc2626';
-                setTimeout(() => {
-                    copyBtn.textContent = originalText;
-                    copyBtn.style.background = '#1e3a8a';
-                }, 2000);
-            }).catch(() => {
-                // Fallback for older browsers
-                const textArea = document.createElement('textarea');
-                textArea.value = jsonDisplay.textContent;
-                document.body.appendChild(textArea);
-                textArea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textArea);
-                
-                const copyBtn = document.querySelector('.action-btn');
-                const originalText = copyBtn.textContent;
-                copyBtn.textContent = 'COPIED!';
-                setTimeout(() => {
-                    copyBtn.textContent = originalText;
-                }, 2000);
-            });
-        }
-
-        function copyNFCString() {
-            const nfcString = document.getElementById('nfc-string').textContent;
-            navigator.clipboard.writeText(nfcString).then(() => {
-                const copyBtn = document.querySelector('.copy-nfc-btn');
-                const originalText = copyBtn.textContent;
-                copyBtn.textContent = 'COPIED!';
-                copyBtn.style.background = '#059669';
-                setTimeout(() => {
-                    copyBtn.textContent = originalText;
-                    copyBtn.style.background = '#dc2626';
-                }, 2000);
-            }).catch(() => {
-                // Fallback for older browsers
-                const textArea = document.createElement('textarea');
-                textArea.value = nfcString;
-                document.body.appendChild(textArea);
-                textArea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textArea);
-                
-                const copyBtn = document.querySelector('.copy-nfc-btn');
-                const originalText = copyBtn.textContent;
-                copyBtn.textContent = 'COPIED!';
-                setTimeout(() => {
-                    copyBtn.textContent = originalText;
-                }, 2000);
-            });
-        }
-
-        function downloadFile() {
-            if (!currentProcedure) {
-                alert('No procedure generated yet.');
+            if (typeof QRious === 'undefined') {
+                console.error('QRious library not loaded');
+                DOMElements.qrCanvas.getContext('2d').fillText('QR Library Error', 10, 100);
                 return;
             }
-            
+            new QRious({ element: DOMElements.qrCanvas, value: text, size: 200 });
+        }
+        
+        const copyToClipboard = (text, btn, successText) => {
+            navigator.clipboard.writeText(text).then(() => {
+                const originalText = btn.textContent;
+                btn.textContent = successText;
+                setTimeout(() => { btn.textContent = originalText; }, 2000);
+            }).catch(err => alert('Failed to copy.'));
+        };
+
+        function downloadFile() {
+            if (!currentProcedure) return;
             const jsonString = JSON.stringify(currentProcedure.data, null, 2);
             const blob = new Blob([jsonString], { type: 'application/json' });
             const url = URL.createObjectURL(blob);
-            
             const a = document.createElement('a');
             a.href = url;
             a.download = `${currentProcedure.filename}.json`;
-            document.body.appendChild(a);
             a.click();
-            document.body.removeChild(a);
             URL.revokeObjectURL(url);
         }
 
-        // Event listeners
-        document.addEventListener('DOMContentLoaded', function() {
-            // Form submission
-            const form = document.querySelector('form');
-            form.addEventListener('submit', function(e) {
+        // --- INITIALIZATION ---
+        document.addEventListener('DOMContentLoaded', () => {
+            DOMElements.form.addEventListener('submit', (e) => {
                 e.preventDefault();
-                generateProcedure();
+                handleGenerateProcedure();
             });
             
-            // Add instruction button
-            const addBtn = document.querySelector('.add-btn');
-            addBtn.addEventListener('click', addInstruction);
+            DOMElements.addBtn.addEventListener('click', () => addInstruction());
+            DOMElements.uploadBtn.addEventListener('click', () => DOMElements.jsonUploadInput.click());
+            DOMElements.jsonUploadInput.addEventListener('change', handleJSONUpload);
             
-            // Upload JSON button
-            const uploadBtn = document.querySelector('.upload-btn');
-            uploadBtn.addEventListener('click', uploadJSON);
+            DOMElements.copyJsonBtn.addEventListener('click', (e) => copyToClipboard(DOMElements.jsonDisplay.textContent, e.target, 'COPIED!'));
+            DOMElements.downloadFileBtn.addEventListener('click', downloadFile);
+            DOMElements.uploadProcedureBtn.addEventListener('click', uploadProcedure);
+            DOMElements.copyNfcBtn.addEventListener('click', (e) => copyToClipboard(DOMElements.nfcStringEl.textContent, e.target, 'COPIED!'));
+
+            DOMElements.titleInput.addEventListener('input', updateStatusBar);
             
-            // File input change
-            const fileInput = document.getElementById('json-upload');
-            fileInput.addEventListener('change', handleJSONUpload);
-            
-            // Remove instruction buttons (for initial containers)
-            document.querySelectorAll('.remove-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    removeInstruction(this.closest('.instruction-container'));
-                });
-            });
-            
-            // Insert instruction buttons (for initial containers)
-            document.querySelectorAll('.insert-btn').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    insertInstruction(this.closest('.instruction-container'));
-                });
-            });
-            
-            // Input validation
-            document.querySelectorAll('.instruction-input').forEach(input => {
-                input.addEventListener('input', updateStatusBar);
-                input.setAttribute('maxlength', MAX_CHAR_PER_INSTRUCTION);
-            });
-            
-            // Title input validation
-            const titleInput = document.querySelector('.form-group input[type="text"]');
-            titleInput.addEventListener('input', updateStatusBar);
-            
-            // Action buttons
-            const actionBtns = document.querySelectorAll('.action-btn');
-            actionBtns[0].addEventListener('click', copyToClipboard); // Copy button
-            actionBtns[1].addEventListener('click', downloadFile); // Download button
-            
-            // Initial status update
+            // Start with 3 empty instruction fields
+            for(let i=0; i < 3; i++) {
+                addInstruction(false);
+            }
             updateStatusBar();
-            
-            // Hide output panel initially
-            document.querySelector('.output-panel').style.display = 'none';
         });
+
     </script>
 </body>
 </html>

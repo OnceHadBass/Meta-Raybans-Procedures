@@ -1,3 +1,5 @@
+oh oops - that's here;
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -82,7 +84,7 @@
             
             if (procedureUid && procedureUrl) {
                 // Construct the special URL that tells Android to open Tasker
-                const taskerUrl = tasker://secondary?task=${taskerTaskName}&par1=${procedureUid}&par2=${procedureUrl};
+                const taskerUrl = `tasker://secondary?task=${taskerTaskName}&par1=${procedureUid}&par2=${procedureUrl}`;
                 
                 statusEl.innerHTML = `Found procedure: <code>${procedureUid}</code><br>Attempting to launch Tasker...`;
                 

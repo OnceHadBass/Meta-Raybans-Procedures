@@ -84,6 +84,15 @@
                 // Construct the special URL that tells Android to open Tasker
                 const taskerUrl = `tasker://task=${taskerTaskName}&par1=${procedureUid}&par2=${procedureUrl}`;
                 
+                // Set the manual link's href
+                taskerLinkEl.setAttribute('href', taskerUrl);
+                
+                // Also add a click listener that forces navigation
+                taskerLinkEl.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    window.location.href = taskerUrl;
+                });
+                
                 statusEl.innerHTML = `Found procedure: <code>${procedureUid}</code><br>Attempting to launch Tasker...`;
                 
                 // Set the manual link's href for the fallback button

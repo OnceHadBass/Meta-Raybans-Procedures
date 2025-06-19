@@ -674,6 +674,9 @@
 
                 <!-- This section will be hidden until upload is complete -->
                 <div id="links-section" style="display: none;">
+                    <div class="action-buttons" style="display:none;" id="post-upload-buttons">
+                      <button class="action-btn" id="download-procedure-btn">Download Procedure</button>
+                    </div>
                     <div class="info-section"></div>
                     <div class="qr-nfc-section">
                         <div class="qr-nfc-header">NFC Tag & QR Code</div>
@@ -720,7 +723,8 @@
             infoSection: document.querySelector('.info-section'),
             qrCanvas: document.getElementById('qr-canvas'),
             nfcStringEl: document.getElementById('nfc-string'),
-            copyNfcBtn: document.querySelector('.copy-nfc-btn')
+            copyNfcBtn: document.querySelector('.copy-nfc-btn'),
+            downloadProcedureBtn: document.getElementById('download-procedure-btn'),
         };
         
         // --- UTILITY FUNCTIONS ---
@@ -910,23 +914,27 @@
         }
         
         function displayFinalLinks(fileUrl) {
-            // NOTE: The trigger page URL should point to your actual trigger page on GitHub pages
-            const triggerPageBaseUrl = 'https://oncehadbass.github.io/Meta-Raybans-Procedures/trigger.html';
-            const qrUrl = `${triggerPageBaseUrl}?uid=${currentProcedure.data.uid}&url=${encodeURIComponent(fileUrl)}`;
-            const nfcString = `${currentProcedure.data.uid}|${fileUrl}`;
-
-            DOMElements.infoSection.innerHTML = `
-                <strong>Filename:</strong> <code>${currentProcedure.filename}.json</code><br>
-                <strong>Procedure ID:</strong> <code>${currentProcedure.data.uid}</code><br>
-                <strong>Live URL (0x0.st):</strong> <code>${fileUrl}</code><br>
-                <strong>NFC Content:</strong> <code>${nfcString}</code><br>
-                <strong>QR Trigger URL:</strong> <code>${qrUrl}</code>`;
-            
-            DOMElements.nfcStringEl.textContent = nfcString;
-            generateQRCode(qrUrl);
-            
-            DOMElements.linksSection.style.display = 'block';
-            DOMElements.linksSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          const triggerPageBaseUrl =
+                'https://oncehadbass.github.io/Meta-Raybans-Procedures/trigger.html';
+          const qrUrl = `${triggerPageBaseUrl}?uid=${currentProcedure.data.uid}&url=${encodeURIComponent(fileUrl)}`;
+          const nfcString = `${currentProcedure.data.uid}|${fileUrl}`;
+        
+          //-- fill the info panel & QR exactly as before
+          DOMElements.infoSection.innerHTML = `
+              <strong>Filename:</strong> <code>${currentProcedure.filename}.json</code><br>
+              <strong>Procedure ID:</strong> <code>${currentProcedure.data.uid}</code><br>
+              <strong>Live URL:</strong> <code>${fileUrl}</code><br>
+              <strong>NFC Content:</strong> <code>${nfcString}</code><br>
+              <strong>QR Trigger URL:</strong> <code>${qrUrl}</code>`;
+          DOMElements.nfcStringEl.textContent = nfcString;
+          generateQRCode(qrUrl);
+        
+          //-- show the new button & give it the link
+          DOMElements.postUploadButtons.style.display = 'flex';
+          DOMElements.downloadProcedureBtn.onclick = () => window.location.href = qrUrl;
+        
+          DOMElements.linksSection.style.display = 'block';
+          DOMElements.linksSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
 
         // --- FILE HANDLING & HELPERS ---

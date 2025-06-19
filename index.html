@@ -915,9 +915,12 @@
         }
         
         function displayFinalLinks(fileUrl) {
-          const triggerPageBaseUrl =
-                'https://oncehadbass.github.io/Meta-Raybans-Procedures/trigger.html';
-          const qrUrl = `${triggerPageBaseUrl}?uid=${currentProcedure.data.uid}&url=${encodeURIComponent(fileUrl)}`;
+            const intentUrl =
+            `intent://assistantactions?task=Download_Procedure` +
+            `&par1=${currentProcedure.data.uid}` +
+            `&par2=${encodeURIComponent(fileUrl)}` +
+            '#Intent;scheme=tasker;package=net.dinglisch.android.taskerm;end';
+            
           const nfcString = `${currentProcedure.data.uid}|${fileUrl}`;
         
           //-- fill the info panel & QR exactly as before
@@ -928,11 +931,11 @@
               <strong>NFC Content:</strong> <code>${nfcString}</code><br>
               <strong>QR Trigger URL:</strong> <code>${qrUrl}</code>`;
           DOMElements.nfcStringEl.textContent = nfcString;
-          generateQRCode(qrUrl);
+          generateQRCode(intentUrl);
         
           //-- show the new button & give it the link
           DOMElements.postUploadButtons.style.display = 'flex';
-          DOMElements.downloadProcedureBtn.onclick = () => window.location.href = qrUrl;
+          DOMElements.downloadProcedureBtn.onclick = () => window.location.href = intentUrl;
         
           DOMElements.linksSection.style.display = 'block';
           DOMElements.linksSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });

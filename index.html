@@ -929,7 +929,7 @@
               <strong>Procedure ID:</strong> <code>${currentProcedure.data.uid}</code><br>
               <strong>Live URL:</strong> <code>${fileUrl}</code><br>
               <strong>NFC Content:</strong> <code>${nfcString}</code><br>
-              <strong>QR Trigger URL:</strong> <code>${qrUrl}</code>`;
+              <strong>QR Trigger URL:</strong> <code>${intentUrl}</code>`;
           DOMElements.nfcStringEl.textContent = nfcString;
           generateQRCode(intentUrl);
         

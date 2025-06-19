@@ -1,110 +1,153 @@
-oh oops - that's here;
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Launching Procedure...</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Launching Procedure…</title>
+
+    <!-- Inter font to match index.html -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
     <style>
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
-                Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-            background-color: #f0f2f5;
-            color: #333;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+        :root {
+            --brand-blue: #1e3a8a;
+            --grey-50: #f8f9fa;
+            --grey-700: #374151;
+            --grey-300: #d1d5db;
+        }
+
+        * {
             margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--grey-50);
+            color: var(--grey-700);
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+        }
+
+        .card {
+            background: #ffffff;
+            border: 1px solid var(--grey-300);
+            width: 100%;
+            max-width: 460px;
+            padding: 32px 24px;
             text-align: center;
-        }
-        .container {
-            padding: 40px;
-            background-color: #fff;
             border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
         }
+
         h1 {
-            color: #1a73e8;
-            margin-bottom: 20px;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--brand-blue);
+            margin-bottom: 16px;
         }
+
         p {
-            font-size: 1.1em;
+            font-size: 14px;
             line-height: 1.6;
         }
+
         code {
-            background-color: #e8eaed;
-            padding: 3px 6px;
+            font-family: "SF Mono", "Monaco", monospace;
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            padding: 2px 6px;
             border-radius: 4px;
-            font-family: 'SF Mono', 'Menlo', 'Monaco', monospace;
             word-break: break-all;
+            font-size: 13px;
         }
-        .link {
+
+        .link-btn {
             display: inline-block;
-            margin-top: 25px;
-            padding: 10px 20px;
-            background-color: #1a73e8;
-            color: #fff;
+            margin-top: 24px;
+            background: var(--brand-blue);
+            color: #ffffff;
+            padding: 12px 20px;
+            font-size: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
             text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s;
+            border-radius: 4px;
+            transition: background 0.2s ease;
         }
-        .link:hover {
-            background-color: #1558b0;
+
+        .link-btn:hover {
+            background: #1e40af;
+        }
+
+        /* Mobile tweaks */
+        @media (max-width: 480px) {
+            .card {
+                padding: 24px 16px;
+            }
+            h1 {
+                font-size: 20px;
+            }
         }
     </style>
 </head>
 <body>
-
-    <div class="container">
-        <h1>Launching Procedure</h1>
-        <p id="status">Getting procedure details...</p>
-        <p id="fallback" style="display: none;">
-            If the procedure does not launch automatically, please ensure Tasker is installed and click the link below.
+    <div class="card">
+        <h1>Launching Procedure…</h1>
+        <p id="status">Retrieving procedure details…</p>
+        <p id="fallback" style="display:none; margin-top:16px;">
+            If nothing happens, tap the button below to open Tasker.
         </p>
-        <a id="tasker-link" class="link" href="#" style="display: none;">Launch Manually</a>
+        <a id="tasker-link" class="link-btn" href="#" style="display:none;">Open in Tasker</a>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const statusEl = document.getElementById('status');
-            const fallbackEl = document.getElementById('fallback');
-            const taskerLinkEl = document.getElementById('tasker-link');
+        document.addEventListener("DOMContentLoaded", () => {
+            const statusEl = document.getElementById("status");
+            const fallbackEl = document.getElementById("fallback");
+            const taskerLink = document.getElementById("tasker-link");
 
-            // Get the URL parameters
+            // Extract query‑string parameters: ?uid=…&url=…
             const params = new URLSearchParams(window.location.search);
-            const procedureUid = params.get('uid');
-            const procedureUrl = params.get('url');
+            const uid = params.get("uid");
+            const fileUrl = params.get("url");
 
-            // --- IMPORTANT: TASKER CONFIGURATION ---
-            // The task name must exactly match what you have in Tasker.
-            // Spaces should be replaced with a plus (+) sign.
-            const taskerTaskName = 'Ray-Ban+Procedure+Loader';
-            
-            if (procedureUid && procedureUrl) {
-                // Construct the special URL that tells Android to open Tasker
-                const taskerUrl = `tasker://secondary?task=${taskerTaskName}&par1=${procedureUid}&par2=${procedureUrl}`;
-                
-                statusEl.innerHTML = `Found procedure: <code>${procedureUid}</code><br>Attempting to launch Tasker...`;
-                
-                // Set the manual link's href for the fallback button
-                taskerLinkEl.href = taskerUrl;
-                
-                // Show the fallback text and button
-                fallbackEl.style.display = 'block';
-                taskerLinkEl.style.display = 'inline-block';
+            // Exact name of the Tasker task that will download & run the procedure.
+            // Use only letters, numbers and underscore. Must match the Task name.
+            const taskerTask = "Download_Procedure";
 
-                // Attempt to automatically redirect to the Tasker URL.
-                // This may be blocked by some browsers, which is why we have the manual link.
-                window.location.href = taskerUrl;
+            if (uid && fileUrl) {
+                const intentUrl =
+                    `intent://assistantactions?task=${taskerTask}` +
+                    `&par1=${encodeURIComponent(fileUrl)}` +
+                    `&par2=${encodeURIComponent(uid)}` +
+                    "#Intent;scheme=tasker;package=net.dinglisch.android.taskerm;end";
 
+                statusEl.innerHTML =
+                    `Found procedure <code>${uid}</code><br>` +
+                    "Opening Tasker…";
+
+                // Manual‑launch link
+                taskerLink.href = intentUrl;
+                fallbackEl.style.display = "block";
+                taskerLink.style.display = "inline-block";
+
+                // Automatic launch (may be blocked by some browsers)
+                window.location.href = intentUrl;
             } else {
-                statusEl.textContent = 'Error: Procedure details (UID or URL) not found in the link.';
-                statusEl.style.color = 'red';
+                statusEl.textContent =
+                    "Error: UID or URL parameter missing in link.";
+                statusEl.style.color = "#dc2626";
             }
         });
     </script>
-
 </body>
 </html>

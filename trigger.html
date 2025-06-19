@@ -115,27 +115,27 @@
             const fallbackEl = document.getElementById("fallback");
             const taskerLink = document.getElementById("tasker-link");
 
-            // Extract query‑string parameters: ?uid=…&url=…
+            // Extract query-string parameters: ?uid=…&url=…
             const params = new URLSearchParams(window.location.search);
             const uid = params.get("uid");
             const fileUrl = params.get("url");
 
             // Exact name of the Tasker task that will download & run the procedure.
-            // Use only letters, numbers and underscore. Must match the Task name.
-            const taskerTask = "Download_Procedure";
+            const taskerTask = "Download_Procedure"; // MUST match Tasker task name
 
             if (uid && fileUrl) {
+                // UID in %par1, file URL in %par2 (order swapped)
                 const intentUrl =
                     `intent://assistantactions?task=${taskerTask}` +
-                    `&par1=${encodeURIComponent(fileUrl)}` +
-                    `&par2=${encodeURIComponent(uid)}` +
+                    `&par1=${encodeURIComponent(uid)}` +
+                    `&par2=${encodeURIComponent(fileUrl)}` +
                     "#Intent;scheme=tasker;package=net.dinglisch.android.taskerm;end";
 
                 statusEl.innerHTML =
-                    `Found procedure <code>${uid}</code><br>` +
+                    `Found procedure <code>${uid}</code><br>` +
                     "Opening Tasker…";
 
-                // Manual‑launch link
+                // Manual-launch link
                 taskerLink.href = intentUrl;
                 fallbackEl.style.display = "block";
                 taskerLink.style.display = "inline-block";

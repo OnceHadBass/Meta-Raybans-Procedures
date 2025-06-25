@@ -78,6 +78,9 @@
         .remove-btn:hover { background: var(--red-destructive-hover); }
 
         /* BUTTON STYLES */
+        /* Add this new class for the red action buttons */
+        .btn-action { background: var(--red-destructive); color: var(--text-light);}
+        .btn-action:hover {background: var(--red-destructive-hover);}
         .button-row { display: flex; gap: 12px; margin-top: 16px; width: 100%; }
         .button-row.right-aligned { justify-content: flex-end; }
         .btn { border: none; padding: 10px 16px; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; cursor: pointer; transition: all 0.2s ease; border-radius: 4px; flex-grow: 1; }
@@ -101,7 +104,12 @@
         .details-content { padding: 16px; font-size: 13px; background-color: var(--text-light); border-top: 1px solid var(--grey-border); }
         .details-content code { background: #f1f5f9; border: 1px solid #cbd5e1; padding: 2px 6px; font-family: 'SF Mono', monospace; font-size: 12px; color: #475569; word-break: break-all; border-radius: 4px; display: inline-block; margin-top: 4px; }
 
-        .qr-container { text-align: center; margin-top: 20px; }
+        .qr-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -129,7 +137,7 @@
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-primary btn-full-span">Generate Procedure</button>
+                <button type="submit" id="generate-btn" class="btn btn-action btn-full-span">Generate Procedure</button>
             </form>
         </div>
 
@@ -143,7 +151,7 @@
                     <button type="button" id="download-file-btn-1" class="btn btn-secondary">Download File</button>
                 </div>
                 <div class="button-row">
-                    <button type="button" id="upload-procedure-btn" class="btn btn-primary btn-full-span">Upload & Get Link</button>
+                    <button type="button" id="upload-procedure-btn" class="btn btn-action btn-full-span">Upload & Get Link</button>
                 </div>
             </div>
 
@@ -164,10 +172,10 @@
                 </div>
                 <div class="button-row">
                     <button type="button" id="share-qr-btn" class="btn btn-secondary">Share QR Code</button>
-                    <button type="button" id="share-link-btn" class="btn btn-primary">Share Link</button>
+                    <button type="button" id="share-link-btn" class="btn btn-action">Share Link</button>
                 </div>
                 <div class="button-row">
-                    <button type="button" id="download-procedure-btn" class="btn btn-primary btn-full-span">Download to Glasses</button>
+                    <button type="button" id="download-procedure-btn" class="btn btn-action btn-full-span">Download to Glasses</button>
                 </div>
                 
                 <div class="qr-container">
@@ -287,6 +295,7 @@
                 DOM.dashboardState.style.display = 'none';
                 updateStepNumbers();
                 DOM.outputPanel.scrollIntoView({ behavior: 'smooth' });
+                document.getElementById('generate-btn').className = 'btn btn-primary btn-full-span';
             }
 
             async function handleUpload() {

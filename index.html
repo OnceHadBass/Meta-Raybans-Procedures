@@ -666,11 +666,12 @@
                 
                 <div class="json-display"></div>
                 
-                <div class="action-buttons">
-                    <button class="action-btn" id="copy-json-btn">Copy JSON</button>
-                    <button class="action-btn" id="download-file-btn">Download File</button>
-                    <button class="action-btn" id="upload-procedure-btn">Upload & Get Link</button>
-                </div>
+            <div class="action-buttons">
+                <button class="action-btn" id="share-btn" style="display: none;">Share Link & QR</button>
+                <button class="action-btn" id="copy-json-btn">Copy JSON</button>
+                <button class="action-btn" id="download-file-btn">Download File</button>
+                <button class="action-btn" id="upload-procedure-btn">Upload & Get Link</button>
+            </div>
 
                 <!-- This section will be hidden until upload is complete -->
                 <div id="links-section" style="display: none;">
@@ -915,32 +916,79 @@
         }
         
         function displayFinalLinks(fileUrl) {
-            const intentUrl =
-            `intent://assistantactions?task=Download_Procedure` +
-            `&par1=${currentProcedure.data.uid}` +
-            `&par2=${encodeURIComponent(fileUrl)}` +
-            '#Intent;scheme=tasker;package=net.dinglisch.android.taskerm;end';
+            // IMPORTANT: Replace this with the URL where you are hosting the project
+            const baseUrl = "https://your-username.github.io/your-repo-name"; 
             
-          const nfcString = `${currentProcedure.data.uid}|${fileUrl}`;
+            const landingPageUrl = `${baseUrl}/landing.html?uid=${currentProcedure.data.uid}&file=${fileUrl}`;
+            const nfcString = `${currentProcedure.data.uid}|${fileUrl}`;
+            const intentUrl = `intent://assistantactions?task=Download_Procedure` +
+                              `&par1=${currentProcedure.data.uid}` +
+                              `&par2=${encodeURIComponent(fileUrl)}` +
+                              '#Intent;scheme=tasker;package=net.dinglisch.android.taskerm;end';
         
-          //-- fill the info panel & QR exactly as before
-          DOMElements.infoSection.innerHTML = `
-              <strong>Filename:</strong> <code>${currentProcedure.filename}.json</code><br>
-              <strong>Procedure ID:</strong> <code>${currentProcedure.data.uid}</code><br>
-              <strong>Live URL:</strong> <code>${fileUrl}</code><br>
-              <strong>NFC Content:</strong> <code>${nfcString}</code><br>
-              <strong>QR Trigger URL:</strong> <code>${intentUrl}</code>`;
-          DOMElements.nfcStringEl.textContent = nfcString;
-          generateQRCode(intentUrl);
+            //-- fill the info panel
+            DOMElements.infoSection.innerHTML = `
+                <strong>Filename:</strong> <code>${currentProcedure.filename}.json</code><br>
+                <strong>Procedure ID:</strong> <code>${currentProcedure.data.uid}</code><br>
+                <strong>Live URL:</strong> <code>${fileUrl}</code><br>
+                <strong>NFC Content:</strong> <code>${nfcString}</code><br>
+                <strong>QR Code URL (for sharing):</strong> <code>${landingPageUrl}</code><br>
+                <strong>Tasker Intent URL (Advanced):</strong> <code>${intentUrl}</code>`;
+                
+            DOMElements.nfcStringEl.textContent = nfcString;
+            generateQRCode(landingPageUrl); // Generate QR code with the new landing page URL
         
-          //-- show the new button & give it the link
-          DOMElements.postUploadButtons.style.display = 'flex';
-          DOMElements.downloadProcedureBtn.onclick = () => window.location.href = intentUrl;
+            //-- show the new button & give it the link
+            DOMElements.postUploadButtons.style.display = 'flex';
+            DOMElements.downloadProcedureBtn.onclick = () => window.location.href = intentUrl;
         
-          DOMElements.linksSection.style.display = 'block';
-          DOMElements.linksSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            // Show the Share button
+            document.getElementById('share-btn').style.display = 'inline-block';
+        
+            DOMElements.linksSection.style.display = 'block';
+            DOMElements.linksSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
 
+        async function handleShare() {
+            const shareBtn = document.getElementById('share-btn');
+            const originalText = shareBtn.textContent;
+            shareBtn.textContent = 'Preparing...';
+        
+            // Get the landing page URL from the info section
+            const landingPageUrl = DOMElements.infoSection.querySelector('code:nth-of-type(5)').textContent;
+            const title = `Procedure: ${currentProcedure.data.title}`;
+            const text = `Here is the procedure "${currentProcedure.data.title}". Scan the QR code or use the link to download it.`;
+        
+            // Check if Web Share API is supported
+            if (!navigator.share) {
+                alert('Web Share API is not supported on this browser. Try copying the link manually.');
+                shareBtn.textContent = originalText;
+                return;
+            }
+        
+            try {
+                // Convert canvas QR code to a Blob to make it shareable
+                const canvas = DOMElements.qrCanvas;
+                const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+                const file = new File([blob], `${currentProcedure.filename}_qr.png`, { type: 'image/png' });
+        
+                // Share the URL, text, and the QR code file
+                await navigator.share({
+                    title: title,
+                    text: text,
+                    url: landingPageUrl,
+                    files: [file]
+                });
+                shareBtn.textContent = 'Shared!';
+        
+            } catch (error) {
+                console.error('Share failed:', error);
+                shareBtn.textContent = 'Share Canceled';
+            } finally {
+                setTimeout(() => { shareBtn.textContent = originalText; }, 3000);
+            }
+        }
+        
         // --- FILE HANDLING & HELPERS ---
         function handleJSONUpload(event) {
             const file = event.target.files[0];
@@ -1018,6 +1066,7 @@
             DOMElements.downloadFileBtn.addEventListener('click', downloadFile);
             DOMElements.uploadProcedureBtn.addEventListener('click', uploadProcedure);
             DOMElements.copyNfcBtn.addEventListener('click', (e) => copyToClipboard(DOMElements.nfcStringEl.textContent, e.target, 'COPIED!'));
+            document.getElementById('share-btn').addEventListener('click', handleShare);
 
             DOMElements.titleInput.addEventListener('input', updateStatusBar);
             

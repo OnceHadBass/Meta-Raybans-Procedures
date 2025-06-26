@@ -1,46 +1,106 @@
-BLISST
-A tool for creating and deploying hands-free lists and procedures to your Meta Ray-Ban Smart Glasses.
+# 🔊 BLISST
 
-BLISST uses Tasker and some hacky workarounds to bypass the locked-down OS on Meta Raybans glasses, enabling navigation of shareable, geo=locatable lists using the built-in media controls (tap on the glasses arm).
+**Create and deploy hands-free lists and procedures to your Meta Ray-Ban Smart Glasses**
 
-🎯 Vision
-Imagine scanning a QR code or NFC tag on any device, recipe book, spare part, or landmark and instantly getting voice-guided instructions on how to use it, cook it, install it, or learn about it. This project makes that possible today, providing a simple web tool to create and deploy procedures that can be navigated hands-free via your glasses. It's a tech demo; pardon our querks.
+[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-brightgreen)](https://your-username.github.io/blisst)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/your-username/blisst/pulls)
 
-📱 How It Works
-Create procedures using the BLISST web interface (Github Pages). The app sanity-checks your list and prepares it for deployment.
-Generate a unique JSON file and hosting URL by clicking "Upload & Get Link". The app then provides triggers for this procedure.
-Imprint the NFC string to a tag, share the QR code or url to the list, or download it direct to your mobile device.
-When you scan the generated QR code or NFC tag, or download the procedure direct, this starts the procedure. 
-The procedure is run using Tasker profiles on your Android device. If you're wearing your Raybans you'll hear the list through your glasses.
-Follow the instructions spoken through your glasses. Tap the glasses' touch-sensitive arm (the media control) to advance to the next step.
+---
 
-Note - Tasker and Spotify both need to be open to run lists.
+## 🎯 Vision
 
-🚀 Use Cases
-Shopping List - Create yourself a shopping list. Walk round the supermarket without needed to get your smartphone / paper list out.
-Recipes - Share a recipe. Let people folow it at their own pace without needing to keep pulling out a phone.
-Exercise Routines - Be guided through your workout, one step at a time.
-Industrial & Office - Tag machines with NFC tags which process hands-free startup and maintenance procedures.
-Emergency Procedures - Scan QR codes and follow critical safety instructions quickly and without using your hands.
-Point-of-Use Training - Learn about any item, part, or exhibit just by scanning it.
-Accessibility - Provide voice-guided assistance for any process.
+Transform any object into a voice-guided experience. Scan a QR code or NFC tag on devices, recipe books, spare parts, or landmarks to instantly receive voice-guided instructions through your Meta Ray-Ban Smart Glasses. Navigate procedures hands-free using simple taps on your glasses' touch-sensitive arm.
 
-🏗️ Architecture
-Trigger Formats
-BLISST uses three types of triggers to launch a procedure:
+> **Note**: This is a tech demo - please pardon our quirks as we continue improving!
 
-QR Code: Contains a standard HTTPS link to a landing page (landing.html) which ensures maximum compatibility with all scanners. Click the button on the landing page to download the procedure and run it. https://your-github-username.github.io/your-repo-name/landing.html?uid=procedure_id&file=file_url
+---
 
-NFC Tag: Contains a pipe-separated string with the procedure's unique ID and its direct JSON file URL. Imprint this to any NFC tag and then scan it to download and run the procedure.
-procedure_id|https://hosted-file-url.com/procedure_id.json
+## ✨ Features
 
-Direct Download: If you create a list from the browser on your phone you can download it directly and run it. Good for shopping lists etc.
+- 🎧 **Hands-free navigation** via Meta Ray-Ban Smart Glasses
+- 📱 **Multiple trigger options**: QR codes, NFC tags, or direct download
+- 🌐 **Web-based creator** for easy procedure building
+- 🔊 **Voice-guided instructions** with tap-to-advance controls
+- 📍 **Geo-locatable procedures** for location-based tasks
+- 🛡️ **Content filtering** for safe, appropriate instructions
 
-JSON Procedure Format
-Each procedure is stored as a simple JSON object with a title and an array of instructions.
+---
 
-JSON
+## 🚀 Use Cases
 
+| **Category** | **Example** | **Benefits** |
+|---|---|---|
+| **🛒 Shopping** | Create shopping lists | Walk through stores hands-free |
+| **👨‍🍳 Cooking** | Share recipes | Follow steps without touching devices |
+| **💪 Fitness** | Exercise routines | Guided workouts with perfect timing |
+| **🏭 Industrial** | Equipment procedures | Safe, hands-free maintenance guides |
+| **🚨 Emergency** | Safety instructions | Critical procedures without delay |
+| **🎓 Training** | Learning modules | Interactive education for any item |
+| **♿ Accessibility** | Voice assistance | Support for various accessibility needs |
+
+---
+
+## 🏗️ How It Works
+
+```mermaid
+graph LR
+    A[Create Procedure] --> B[Generate QR/NFC]
+    B --> C[Scan Trigger]
+    C --> D[Download to Phone]
+    D --> E[Tasker Runs Procedure]
+    E --> F[Voice Through Glasses]
+    F --> G[Tap to Navigate]
+```
+
+### Step-by-Step Process
+
+1. **📝 Create** procedures using the BLISST web interface > 
+2. **🔗 Generate** unique JSON file and hosting URL
+3. **📲 Deploy** via QR code, NFC tag, or direct download
+4. **👓 Listen** to instructions through your Ray-Ban glasses
+5. **👆 Navigate** by tapping the glasses' touch-sensitive arm
+
+---
+
+## 🔧 Quick Setup
+
+### For Users
+
+#### Prerequisites
+- 📱 Android device with Tasker app installed
+- 👓 Meta Ray-Ban Smart Glasses
+- 🎵 Spotify app (needs to be open during use)
+
+#### Installation Steps
+
+1. **Install Tasker**
+   ```
+   Download from Google Play Store
+   ```
+
+2. **Import BLISST Project**
+   - Download `BLISST_Tasker_Project.xml.txt` from this repository
+   - In Tasker: Long-press 🏠 → "Import Project" → Select downloaded file
+   - Enable the project toggle
+
+3. **You're Ready!** 🎉
+   Start scanning QR codes or NFC tags to run procedures
+
+---
+
+## 🌐 Creating Procedures
+
+### Web Interface (Recommended)
+
+1. Visit your GitHub Pages URL > https://oncehadbass.github.io/Meta-Raybans-Procedures/
+2. Enter procedure title and steps
+3. Click **"Generate Procedure"** to review
+4. Click **"Upload & Get Link"** for QR/NFC triggers
+
+### JSON Format
+
+```json
 {
   "title": "Coffee Machine Setup",
   "uid": "a1b2c3d4",
@@ -50,58 +110,120 @@ JSON
     { "step": 3, "instruction": "Press brew button" }
   ]
 }
+```
 
-Backend Service
-File hosting is handled by a simple proxy server running on Glitch. This allows the web app to upload and host the generated JSON files without needing a complex backend.
+---
 
-🔧 Setup
-For Users
-Install Tasker: You must have the Tasker app installed on your Android phone.
+## 🔗 Trigger Formats
 
-Import Project: Download the BLISST_Tasker_Project.xml.txt file from this repository: [LINK TO YOUR TASKER XML FILE HERE].
+### QR Code
+```
+https://your-github-username.github.io/your-repo-name/landing.html?uid=procedure_id&file=file_url
+```
+*Standard HTTPS link for maximum scanner compatibility*
 
-In Tasker, long-press the "Home" icon (🏠) and select "Import Project", then choose the file you downloaded.
-Enable the project by making sure the toggle next to its name is on. You're ready to start scanning!
-For Developers (Self-Hosting)
+### NFC Tag
+```
+procedure_id|https://hosted-file-url.com/procedure_id.json
+```
+*Pipe-separated string for direct procedure access*
 
-If you want to host your own instance of BLISST:
+### Direct Download
+*Perfect for personal lists created on mobile browsers*
 
-Fork This Repository: Click "Fork" to create your own copy.
-Enable GitHub Pages: In your forked repo, go to Settings → Pages. For the source, select "Deploy from a branch" and choose the main branch.
-Update URLs in index.html:
-In the displayFinalLinks function, change the baseUrl variable to your own GitHub Pages URL.
-(Optional) If you set up your own hosting backend, change the proxyUrl variable in the handleUpload function.
+---
 
-📝 Creating Procedures
-The easiest way to create procedures is via the web interface hosted on your GitHub Pages site.
+## 🏗️ Architecture
 
-Visit your GitHub Pages URL.
-Enter a procedure title and add your steps.
-Click Generate Procedure to review the data.
-Click Upload & Get Link to publish the list and get your QR/NFC triggers.
+### Frontend
+- **GitHub Pages** hosting for the web interface
+- **Vanilla JavaScript** for procedure creation and management
+- **Responsive design** for mobile and desktop
 
-🛡️ Security & Quality
-Content Filtering: The web app includes a basic profanity filter to prevent inappropriate language in procedure titles and steps.
-Hosting: The backend service is simple and does not execute any code, it only hosts static .json files.
-Content Guidelines: Please keep instructions clear, concise, and safe. Test your procedures before creating public triggers for them.
+### Backend
+- **Glitch proxy server** for JSON file hosting
+- **Static file storage** - no code execution
+- **Simple REST API** for file uploads
 
-🤝 Contributing
-This is a proof-of-concept project, and improvements are welcome.
+### Mobile Integration
+- **Tasker automation** for Android procedure execution
+- **Media controls integration** with Ray-Ban glasses
+- **Spotify integration** for audio playback routing
 
-Bug reports and feature requests can be submitted via GitHub Issues.
-Code contributions via Pull Requests are appreciated.
-Documentation improvements are always needed.
+---
 
-📄 License
-This project is distributed under the MIT License. See the LICENSE file for details.
+## 🔒 Security & Quality
 
-🆘 Support
-Issues: Report bugs and request features via GitHub Issues.
-Discussions: Join conversations in GitHub Discussions.
+- ✅ **Content Filtering**: Built-in profanity filter
+- ✅ **Static Hosting**: No server-side code execution
+- ✅ **Safe Instructions**: Encouraged clear, concise, safe content
+- ✅ **Testing**: Always test procedures before public deployment
 
-🌟 Star This Project
-If you find this project useful or interesting, please star the repository to help others discover it!
+---
 
-Made with ❤️ for the maker and smart glasses community.
+## 🚀 Self-Hosting (Developers)
 
-Turn any object into a voice-guided experience, one QR code or NFC tag at a time.
+### Quick Fork Setup
+
+1. **Fork this repository**
+2. **Enable GitHub Pages**
+   - Settings → Pages → Deploy from branch (main)
+3. **Update URLs in `index.html`**
+   ```javascript
+   const baseUrl = 'https://YOUR-USERNAME.github.io/YOUR-REPO-NAME';
+   ```
+4. **(Optional) Custom Backend**
+   - Update `proxyUrl` in `handleUpload` function
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions from the community! Here's how you can help:
+
+### 🐛 Bug Reports
+- Use [GitHub Issues](../../issues) with detailed descriptions
+- Include steps to reproduce and expected behavior
+
+### 💡 Feature Requests  
+- Submit via [GitHub Issues](../../issues) with the "enhancement" label
+- Describe the use case and potential implementation
+
+### 🔧 Code Contributions
+- Fork the repository and create a feature branch
+- Submit Pull Requests with clear descriptions
+- Follow existing code style and conventions
+
+### 📚 Documentation
+- Help improve README, code comments, and user guides
+- Add examples and use case documentation
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## 🌟 Show Your Support
+
+If you find BLISST useful or interesting:
+
+- ⭐ **Star this repository** to help others discover it
+- 🍴 **Fork it** to create your own procedures
+- 📢 **Share** with the maker and smart glasses community
+- 🤝 **Contribute** via issues, discussions, or pull requests
+
+---
+
+<div align="center">
+
+**Made with ❤️ for the maker and smart glasses community**
+
+*Turn any object into a voice-guided experience, one QR code or NFC tag at a time*
+
+[![GitHub followers](https://img.shields.io/github/followers/your-username?style=social)](https://github.com/your-username)
+[![GitHub stars](https://img.shields.io/github/stars/your-username/blisst?style=social)](https://github.com/your-username/blisst)
+
+</div>

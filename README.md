@@ -1,159 +1,107 @@
-# Meta-Raybans-Procedures
-A way of having Meta Raybans glasses speak step by step SOPs to you using Tasker and some little tricks
+BLISST
+A tool for creating and deploying hands-free lists and procedures to your Meta Ray-Ban Smart Glasses.
 
-# NFC Procedure Database
+BLISST uses Tasker and some hacky workarounds to bypass the locked-down OS on Meta Raybans glasses, enabling navigation of shareable, geo=locatable lists using the built-in media controls (tap on the glasses arm).
 
-An open standard for embedding step-by-step instructions in NFC tags, enabling hands-free guided procedures - Tasker reads the next instruction when you tap the glasses and this audible from the glasses.
+🎯 Vision
+Imagine scanning a QR code or NFC tag on any device, recipe book, spare part, or landmark and instantly getting voice-guided instructions on how to use it, cook it, install it, or learn about it. This project makes that possible today, providing a simple web tool to create and deploy procedures that can be navigated hands-free via your glasses. It's a tech demo; pardon our querks.
 
-## 🎯 Vision
+📱 How It Works
+Create procedures using the BLISST web interface (Github Pages). The app sanity-checks your list and prepares it for deployment.
+Generate a unique JSON file and hosting URL by clicking "Upload & Get Link". The app then provides triggers for this procedure.
+Imprint the NFC string to a tag, share the QR code or url to the list, or download it direct to your mobile device.
+When you scan the generated QR code or NFC tag, or download the procedure direct, this starts the procedure. 
+The procedure is run using Tasker profiles on your Android device. If you're wearing your Raybans you'll hear the list through your glasses.
+Follow the instructions spoken through your glasses. Tap the glasses' touch-sensitive arm (the media control) to advance to the next step.
 
-Imagine scanning an NFC tag on any device / recipe book / spare part / landmark etc. and instantly getting voice-guided instructions on how to use it / cook it / install it / navigate around it. This project creates an open standard where anyone can embed procedures in NFC tags and having those instructions be navigable via the Raybans glasses. It's still a little glitchy so please excuse those.
+Note - Tasker and Spotify both need to be open to run lists.
 
-## 🚀 Use Cases
+🚀 Use Cases
+Shopping List - Create yourself a shopping list. Walk round the supermarket without needed to get your smartphone / paper list out.
+Recipes - Share a recipe. Let people folow it at their own pace without needing to keep pulling out a phone.
+Exercise Routines - Be guided through your workout, one step at a time.
+Industrial & Office - Tag machines with NFC tags which process hands-free startup and maintenance procedures.
+Emergency Procedures - Scan QR codes and follow critical safety instructions quickly and without using your hands.
+Point-of-Use Training - Learn about any item, part, or exhibit just by scanning it.
+Accessibility - Provide voice-guided assistance for any process.
 
-- **Manufacturing equipment** - Safe startup and operation procedures hands free.
-- **Recipes** - Recipe instructions as you make it - but at your pace - no pressure!
-- **Spare Parts** - Installation instructions hands free as you work.
-- **Office devices** - Setup and troubleshooting guides
-- **Emergency procedures** - Critical safety instructions - helping you move faster hands free
-- **Training materials** - Learn about any part / item / thing just be scanning it - learning at the point of use
-- **Accessibility** - Voice-guided assistance for any process
+🏗️ Architecture
+Trigger Formats
+BLISST uses three types of triggers to launch a procedure:
 
-## 📱 How It Works
+QR Code: Contains a standard HTTPS link to a landing page (landing.html) which ensures maximum compatibility with all scanners. Click the button on the landing page to download the procedure and run it. https://your-github-username.github.io/your-repo-name/landing.html?uid=procedure_id&file=file_url
 
-1. **Create** procedures using the web interface - the interface sanity checks procedures (length and profanity) and then logs them to the project giving that a UID and a json.
-2. **Generate** NFC tags by imprinting them with the procedure UID and json URL - you can use the NFC tools app for this 
-3. **Scan** tags with your phone - YOU NEED TO INSTALL THE TASKER APK FOR THIS PROJECT - to start your voice-guided instructions
-4. **Follow** Tap the right side glasses leg and get the next instruction.
+NFC Tag: Contains a pipe-separated string with the procedure's unique ID and its direct JSON file URL. Imprint this to any NFC tag and then scan it to download and run the procedure.
+procedure_id|https://hosted-file-url.com/procedure_id.json
 
-## 🏗️ Architecture
+Direct Download: If you create a list from the browser on your phone you can download it directly and run it. Good for shopping lists etc.
 
-### NFC Tag Format
-Each NFC tag contains:
-```
-procedure_id|https://yourdomain.github.io/procedure-database/procedures/procedure_id.json
-```
+JSON Procedure Format
+Each procedure is stored as a simple JSON object with a title and an array of instructions.
 
-### JSON Procedure Format
-```json
+JSON
+
 {
   "title": "Coffee Machine Setup",
+  "uid": "a1b2c3d4",
   "instructions": [
-    {"step": 1, "instruction": "Fill water reservoir with fresh water"},
-    {"step": 2, "instruction": "Insert coffee pod into chamber"},
-    {"step": 3, "instruction": "Press brew button"},
-    {"step": 4, "instruction": "Wait for completion beep"}
+    { "step": 1, "instruction": "Fill water reservoir with fresh water" },
+    { "step": 2, "instruction": "Insert coffee pod into chamber" },
+    { "step": 3, "instruction": "Press brew button" }
   ]
 }
-```
-COMMENT - I'm considering making this json structure more complex for more options e.g. tools for this step - maybe you double tap the glasses for those or something.
 
-### Local Caching
-- Procedures are cached locally after first download
-- Works offline after initial sync
-UPDATING - right now, there's no way to update a procedure once it's in the database. I need to figure that out but right now this is a proof of concept.
+Backend Service
+File hosting is handled by a simple proxy server running on Glitch. This allows the web app to upload and host the generated JSON files without needing a complex backend.
 
-## 🔧 Setup
+🔧 Setup
+For Users
+Install Tasker: You must have the Tasker app installed on your Android phone.
 
-### 1. Fork This Repository
-Click "Fork" to create your own procedure database.
+Import Project: Download the BLISST_Tasker_Project.xml.txt file from this repository: [LINK TO YOUR TASKER XML FILE HERE].
 
-### 2. Enable GitHub Pages
-- Go to Settings → Pages
-- Source: Deploy from branch `main`
-- Your database will be available at: `https://yourusername.github.io/procedure-database/`
+In Tasker, long-press the "Home" icon (🏠) and select "Import Project", then choose the file you downloaded.
+Enable the project by making sure the toggle next to its name is on. You're ready to start scanning!
+For Developers (Self-Hosting)
 
-### 3. Create Procedures
-- Visit your GitHub Pages URL
-- Use the web interface to create new procedures
-- Each procedure generates a unique JSON file
+If you want to host your own instance of BLISST:
 
-### 4. Set Up NFC Reader (Android + Tasker)
-- Install Tasker app
-- Import the provided Tasker profile (coming soon)
-- Configure your trusted domain URL
-- Start scanning NFC tags!
+Fork This Repository: Click "Fork" to create your own copy.
+Enable GitHub Pages: In your forked repo, go to Settings → Pages. For the source, select "Deploy from a branch" and choose the main branch.
+Update URLs in index.html:
+In the displayFinalLinks function, change the baseUrl variable to your own GitHub Pages URL.
+(Optional) If you set up your own hosting backend, change the proxyUrl variable in the handleUpload function.
 
-## 📝 Creating Procedures
+📝 Creating Procedures
+The easiest way to create procedures is via the web interface hosted on your GitHub Pages site.
 
-### Web Interface
-1. Visit your GitHub Pages site
-2. Enter procedure title and steps
-3. Generate JSON file
-4. Create NFC tag with the provided ID and URL
+Visit your GitHub Pages URL.
+Enter a procedure title and add your steps.
+Click Generate Procedure to review the data.
+Click Upload & Get Link to publish the list and get your QR/NFC triggers.
 
-### Manual Creation
-Create files in `procedures/` folder:
-- Filename: `your_procedure_name.json`
-- Format: Follow the JSON structure above
-- Limits: Max 50 steps, 200 characters per instruction
+🛡️ Security & Quality
+Content Filtering: The web app includes a basic profanity filter to prevent inappropriate language in procedure titles and steps.
+Hosting: The backend service is simple and does not execute any code, it only hosts static .json files.
+Content Guidelines: Please keep instructions clear, concise, and safe. Test your procedures before creating public triggers for them.
 
-## 🛡️ Security & Quality
+🤝 Contributing
+This is a proof-of-concept project, and improvements are welcome.
 
-### Trusted Sources
-- Only procedures from verified domains are executed
-- Domain validation prevents malicious content
-- Local size limits prevent abuse
+Bug reports and feature requests can be submitted via GitHub Issues.
+Code contributions via Pull Requests are appreciated.
+Documentation improvements are always needed.
 
-### Content Guidelines
-- Keep instructions clear and concise
-- Test procedures before publishing
-- Avoid dangerous or inappropriate content
-- Use simple language for accessibility
+📄 License
+This project is distributed under the MIT License. See the LICENSE file for details.
 
-## 🤝 Contributing
+🆘 Support
+Issues: Report bugs and request features via GitHub Issues.
+Discussions: Join conversations in GitHub Discussions.
 
-### Adding Procedures
-1. Fork this repository
-2. Create procedure JSON files in `procedures/` folder
-3. Submit pull request with your additions
-4. Community review and approval
+🌟 Star This Project
+If you find this project useful or interesting, please star the repository to help others discover it!
 
-### Improving the Platform
-- Bug reports and feature requests welcome
-- Code contributions appreciated
-- Documentation improvements needed
+Made with ❤️ for the maker and smart glasses community.
 
-## 📋 Roadmap
-
-- [ ] **v1.0** - Basic voice-guided procedures
-- [ ] **v1.1** - Multi-language support
-- [ ] **v1.2** - Visual aids and images
-- [ ] **v2.0** - Conditional branching ("If X, then Y")
-- [ ] **v2.1** - User progress tracking
-- [ ] **v3.0** - IoT device integration
-
-## 🔗 Example Procedures
-
-This repository includes sample procedures:
-- `coffee_machine_setup.json` - Basic appliance operation
-- `printer_startup.json` - Equipment initialization
-- `test_simple.json` - Simple demo procedure
-
-## 📱 Compatible Apps
-
-Currently supported:
-- **Android + Tasker** - Full voice guidance
-- **Web interface** - Procedure creation and management
-
-## 📄 License
-
-MIT License - See [LICENSE](LICENSE) for details.
-
-This project is designed to be an open standard. Use it, modify it, build on it!
-
-## 🆘 Support
-
-- **Issues**: Report bugs and request features via GitHub Issues
-- **Discussions**: Join conversations in GitHub Discussions
-- **Documentation**: Check the Wiki for detailed guides
-
-## 🌟 Star This Project
-
-If you find this useful, please star the repository to help others discover it!
-
----
-
-**Made with ❤️ for the maker community**
-
-*Don't let Meta stop you doing cool stuff with your Meta Raybans :) Turn every object into a voice-guided experience, one NFC tag at a time.*
+Turn any object into a voice-guided experience, one QR code or NFC tag at a time.

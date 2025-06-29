@@ -8,16 +8,16 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
         
         :root {
-            --blue-primary: #1e3a8a;
-            --blue-primary-hover: #1e40af;
+            --blue-primary: #1e40af;
+            --blue-primary-hover: #1e3a8a;
             --blue-secondary-bg: #e0f2fe;
             --blue-secondary-text: #0c4a6e;
             --blue-secondary-hover: #bae6fd;
             --grey-status: #6b7280;
             --grey-border: #e5e7eb;
-            --grey-light-bg: #f8f9fa;
-            --red-destructive: #ef4444;
-            --red-destructive-hover: #dc2626;
+            --grey-light-bg: #11132a;
+            --red-destructive: #fe015a;
+            --red-destructive-hover: #dc0149;
             --text-dark: #2c3e50;
             --text-light: #ffffff;
         }
@@ -36,26 +36,26 @@
         @media (min-width: 768px) { .container { padding: 24px; } }
 
         .header {
-            background: var(--text-light);
-            border: 1px solid var(--grey-border);
+            background: var(--grey-light-bg);
+            border: none;
             padding: 20px;
             margin-bottom: 16px;
             text-align: center;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-            border-radius: 8px;
+            border-radius: 4px;
         }
         @media (min-width: 768px) { .header { padding: 32px; margin-bottom: 24px; } }
 
         .header h1 { font-size: 24px; font-weight: 700; color: var(--blue-primary); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; }
         @media (min-width: 768px) { .header h1 { font-size: 28px; } }
-        .header p { font-size: 14px; color: var(--grey-status); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 500; }
+        .header p { font-size: 14px; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.5px; font-weight: 500; }
 
         .main-panel, .output-panel {
             background: var(--text-light);
             border: 1px solid var(--grey-border);
             padding: 20px;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-            border-radius: 8px;
+            border-radius: 4px;
         }
         @media (min-width: 768px) { .main-panel, .output-panel { padding: 32px; } }
 
@@ -63,7 +63,7 @@
         .form-label { display: block; font-weight: 600; margin-bottom: 8px; color: var(--blue-primary); text-transform: uppercase; font-size: 12px; letter-spacing: 0.5px; }
 
         .input-field { width: 100%; padding: 12px 16px; border: 1px solid #d1d5db; font-family: 'Inter', sans-serif; font-size: 14px; border-radius: 4px; transition: all 0.2s ease; }
-        .input-field:focus { outline: none; border-color: var(--blue-primary); box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1); }
+        .input-field:focus { outline: none; border-color: var(--blue-primary); box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1); }
 
         /* INSTRUCTION STYLES */
         .instructions-container { background: #f9fafb; border: 1px solid var(--grey-border); padding: 16px; border-radius: 4px; }
@@ -122,22 +122,22 @@
         <div class="main-panel">
             <form id="procedure-form">
                 <div class="form-group">
-                    <label class="form-label">Procedure Title</label>
+                    <label class="form-label">List Title</label>
                     <input type="text" id="procedure-title" class="input-field" placeholder="e.g., Coffee machine initialization" required>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">Instructions</label>
+                    <label class="form-label">List Items</label>
                     <div class="instructions-container" id="instructions-container">
                         </div>
                     <div class="button-row right-aligned" id="creation-buttons">
                         <button type="button" id="upload-json-btn" class="btn btn-secondary">Upload JSON</button>
-                        <button type="button" id="add-instruction-btn" class="btn btn-primary">+ Add Instruction</button>
+                        <button type="button" id="add-instruction-btn" class="btn btn-primary">+ Add List Item</button>
                         <input type="file" id="json-upload-input" accept=".json" style="display: none;">
                     </div>
                 </div>
 
-                <button type="submit" id="generate-btn" class="btn btn-action btn-full-span">Generate Procedure</button>
+                <button type="submit" id="generate-btn" class="btn btn-action btn-full-span">Generate List</button>
             </form>
         </div>
 
@@ -237,7 +237,7 @@
                 container.innerHTML = `
                     <div class="instruction-row">
                         <div class="step-number">00</div>
-                        <input type="text" class="input-field" placeholder="Enter instruction" value="${text}">
+                        <input type="text" class="input-field" placeholder="Enter list item" value="${text}">
                         <button type="button" class="remove-btn">×</button>
                     </div>
                     <div class="insert-button-row">
@@ -248,7 +248,7 @@
                     if (DOM.instructionsContainer.children.length > 1) {
                         container.remove();
                         updateStepNumbers();
-                    } else { alert('At least one instruction is required.'); }
+                    } else { alert('At least one list item is required.'); }
                 });
                 
                 container.querySelector('.insert-btn').addEventListener('click', () => insertInstruction(container));
@@ -277,7 +277,7 @@
                 const instructions = Array.from(DOM.instructionsContainer.querySelectorAll('input')).map(i => i.value.trim()).filter(Boolean);
 
                 if (!title || instructions.length === 0 || checkProfanity(title) || instructions.some(checkProfanity)) {
-                    alert('Please ensure the title and all instructions are filled out without inappropriate language.');
+                    alert('Please ensure the title and all list items are filled out without inappropriate language.');
                     return;
                 }
 

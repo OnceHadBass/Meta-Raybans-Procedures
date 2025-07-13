@@ -315,7 +315,7 @@
 
             async function handleUpload() {
                 if (!currentProcedure) return;
-                const proxyUrl = "https://carnation-jet-apparel.glitch.me/upload";
+                const proxyUrl = "https://YOUR-PROJECT-NAME.vercel.app/upload";
                 
                 DOM.uploadProcedureBtn.disabled = true;
                 DOM.uploadProcedureBtn.textContent = 'Uploading...';
@@ -342,7 +342,6 @@
             }
 
             function displayFinalLinks(fileUrl) {
-                // IMPORTANT: Replace this with the URL where you host this project
                 const baseUrl = "https://oncehadbass.github.io/Meta-Raybans-Procedures/";
 
                 const landingPageUrl = `${baseUrl}/landing.html?uid=${currentProcedure.data.uid}&file=${fileUrl}`;
